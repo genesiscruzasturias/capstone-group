@@ -24,13 +24,13 @@ public class PostController {
     public String homePage(Model model) {
         ArrayList<Post> allPosts = new ArrayList<>(postDAO.findAll());
         model.addAttribute("allPosts", allPosts);
-        return "home";
+        return "index";
     }
 
     @GetMapping("/posts/create")
     public String setPostModel(Model model) {
         model.addAttribute("post", new Post());
-        return "create";
+        return "create-posts";
     }
 
     @PostMapping("/posts/create")
