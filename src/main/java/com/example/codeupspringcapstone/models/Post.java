@@ -2,6 +2,8 @@ package com.example.codeupspringcapstone.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -16,6 +18,9 @@ public class Post {
 
     @Column(name = "description", nullable = false)
     private String description;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Comments> comments;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
