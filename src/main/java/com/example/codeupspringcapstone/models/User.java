@@ -23,6 +23,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "profile_image")
+    private String imgPath;
+
     // CREATING RELATIONSHIPS
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
@@ -42,6 +45,13 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String username, String email, String password, String imgPath) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.imgPath = imgPath;
     }
 
     // GETTERS AND SETTERS
@@ -77,5 +87,11 @@ public class User {
         return password;
     }
 
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+    public String getImgPath() {
+        return imgPath;
+    }
 
 }
