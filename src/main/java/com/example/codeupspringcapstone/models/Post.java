@@ -2,6 +2,8 @@ package com.example.codeupspringcapstone.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -11,20 +13,35 @@ public class Post {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "title", nullable = false)
-    private String title;
+    @Column(name = "image")
+    private String image;
 
-    @Column(name = "video")
-    private String video;
-
+    @Column(name = "desc")
+    private String desc;
+    @Column(name = "brewery")
+    private String brewery;
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "comment")
+    private List<Comment> comments;
 
     public Post() {}
-    public Post(String title, String video) {
-        this.title = title;
-        this.video = video;
+
+    public Post(Post copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        image = copy.image;
+        desc = copy.desc;
+        brewery = copy.brewery;
+        user = copy.user;
+        comments = copy.comments;
+    }
+
+    public Post(String image, String desc, String brewery, List<Comment> comments) {
+        this.image = image;
+        this.desc = desc;
+        this.brewery = brewery;
+        this.comments = comments;
     }
 
     public void setId (Long id) {
@@ -35,20 +52,36 @@ public class Post {
         return id;
     }
 
-    public void setTitle (String title) {
-        this.title = title;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getTitle () {
-        return title;
+    public String getImage () {
+        return image;
     }
 
-    public void setVideo (String video) {
-        this.video = video;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
-    public String getVideo () {
-        return video;
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setBrewery (String brewery) {
+        this.brewery = brewery;
+    }
+
+    public String getBrewery () {
+        return brewery;
+    }
+
+    public void setComments (List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Comment> getComments () {
+        return comments;
     }
 
     public void setUser (User user) { this.user = user; }
