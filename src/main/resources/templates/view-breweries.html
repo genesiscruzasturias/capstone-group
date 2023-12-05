@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Brewery DB Search</title>
+    <link rel="stylesheet" href="brew.css">
 <body>
+<div class="container">
+    <h1>Search Open Brewery DB</h1>
+    <input type="text" id="breweryName" placeholder="Brewery Name">
+    <input type="text" id="city" placeholder="City">
+    <input type="text" id="state" placeholder="State">
+    <select id="breweryType">
+        <option value="">Select Brewery Type</option>
+        <option value="micro">Micro</option>
+        <option value="nano">Nano</option>
+        <option value="regional">Regional</option>
+        <option value="brewpub">Brewpub</option>
+        <option value="large">Large</option>
+        <option value="planning">Planning</option>
+        <option value="bar">Bar</option>
+        <option value="contract">Contract</option>
+        <option value="proprietor">Proprietor</option>
+        <option value="closed">Closed</option>
+    </select>
+    <button onclick="searchBreweries()">Search</button>
+    <div id="results"></div>
+</div>
+
+
+
+<script src="brew.js"></script>
 
 </body>
 </html>
