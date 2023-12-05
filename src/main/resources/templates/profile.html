@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+    <div class="container">
+        <div class="profileBox-container">
+            <div class="pfp"></div>
+            <div class="user=info">
+                <span th:text="${username}">Username</span>
+                <span th:text="${user.email}">User Email</span>
+                <span th:text="${user.password}">Password
+                </span>
+                <a ref="/change-user-info">Edit user information</a>
+            </div>
+            <div class="achievements-box">
+                <h2>Achievements</h2>
+                <div class="achievements-show"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
