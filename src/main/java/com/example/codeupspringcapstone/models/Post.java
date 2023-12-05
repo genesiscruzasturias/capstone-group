@@ -2,8 +2,6 @@ package com.example.codeupspringcapstone.models;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -13,42 +11,40 @@ public class Post {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "image")
+    @Column(name = "image", nullable = false)
     private String image;
 
-    @Column(name = "desc")
-    private String desc;
-    @Column(name = "brewery")
-    private String brewery;
+    @Column(name = "description", nullable = false)
+    private String description;
+
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "comment")
-    private List<Comment> comments;
 
-    public Post() {}
-
-    public Post(Post copy) {
-        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
-        image = copy.image;
-        desc = copy.desc;
-        brewery = copy.brewery;
-        user = copy.user;
-        comments = copy.comments;
-    }
-
-    public Post(String image, String desc, String brewery, List<Comment> comments) {
+    //    CREATING CONSTRUCTORS
+    public Post(){}
+    public Post(String image, String description) {
         this.image = image;
-        this.desc = desc;
-        this.brewery = brewery;
-        this.comments = comments;
+        this.description = description;
     }
 
-    public void setId (Long id) {
+    public Post(User user, String image, String description) {
+        this.user = user;
+        this.image = image;
+        this.description = description;
+    }
+
+    public Post(long id, String image, String description) {
+        this.id = id;
+        this.image = image;
+        this.description = description;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getId () {
+    public Long getId() {
         return id;
     }
 
@@ -56,36 +52,19 @@ public class Post {
         this.image = image;
     }
 
-    public String getImage () {
+    public String getImage() {
         return image;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setBrewery (String brewery) {
-        this.brewery = brewery;
-    }
-
-    public String getBrewery () {
-        return brewery;
-    }
-
-    public void setComments (List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<Comment> getComments () {
-        return comments;
+    public String getDescription() {
+        return description;
     }
 
     public void setUser (User user) { this.user = user; }
 
     public User getUser() { return user; }
-
 }
