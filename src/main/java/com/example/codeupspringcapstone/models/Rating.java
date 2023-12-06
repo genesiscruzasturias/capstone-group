@@ -13,7 +13,7 @@ public class Rating {
     private Long id;
 
     @OneToOne
-    @JoinColumn (name = "id")
+    @JoinColumn (name = "review_id")
     private Review review;
 
     public Rating(Long id, Review review) {

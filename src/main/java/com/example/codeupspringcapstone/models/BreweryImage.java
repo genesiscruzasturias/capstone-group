@@ -11,20 +11,16 @@ public class BreweryImage {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "image", nullable = false)
-    private String image;
-
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "img_path", nullable = false)
+    private String imgPath;
 
     @OneToOne
-    @JoinColumn (name = "id")
+    @JoinColumn (name = "review_id")
     private Review review;
 
-    public BreweryImage(Long id, String image, String name, Review review) {
+    public BreweryImage(Long id, String imgPath, Review review) {
         this.id = id;
-        this.image = image;
-        this.name = name;
+        this.imgPath = imgPath;
         this.review = review;
     }
 
@@ -40,19 +36,11 @@ public class BreweryImage {
     }
 
     public String getImage() {
-        return image;
+        return imgPath;
     }
 
     public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.imgPath = imgPath;
     }
 
     public Review getReview() {
