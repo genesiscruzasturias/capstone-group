@@ -16,7 +16,7 @@ public class Likes {
     @Column(name = "like", nullable = false)
     private String like;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn (name = "user_id")
     private User user;
 
