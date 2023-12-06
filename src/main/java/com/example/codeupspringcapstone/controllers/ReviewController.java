@@ -1,8 +1,8 @@
 package com.example.codeupspringcapstone.controllers;
 
-import com.example.codeupspringcapstone.models.Post;
+import com.example.codeupspringcapstone.models.Review;
 import com.example.codeupspringcapstone.models.User;
-import com.example.codeupspringcapstone.repositories.PostRepository;
+import com.example.codeupspringcapstone.repositories.ReviewRepository;
 import com.example.codeupspringcapstone.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,43 +10,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @Controller
-public class PostController {
+public class ReviewController {
 
-    private final PostRepository postDAO;
+    private final ReviewRepository reviewDAO;
     private final UserRepository userDAO;
 
-    public PostController(PostRepository postDAO, UserRepository userDAO) {
-        this.postDAO = postDAO;
+    public ReviewController(ReviewRepository reviewDAO, UserRepository userDAO) {
+        this.reviewDAO = reviewDAO;
         this.userDAO = userDAO;
     }
 
-    @GetMapping("/posts")
+    @GetMapping("/reviews")
     public String homePage(Model model) {
-        ArrayList<Post> allPosts = new ArrayList<>(postDAO.findAll());
+        ArrayList<Review> allPosts = new ArrayList<>(reviewDAO.findAll());
         model.addAttribute("allPosts", allPosts);
         return "index";
     }
 
-    @GetMapping("/posts/create")
+    @GetMapping("/reviews/create")
     public String setPostModel(Model model) {
-        model.addAttribute("post", new Post());
+        model.addAttribute("post", new Review());
         return "create-posts";
     }
 
-    @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post){
+    @PostMapping("/reviews/create")
+    public String createPost(@ModelAttribute Review post){
         User user = userDAO.getUsersById(1L);
         post.setUser(user);
-        postDAO.save(post);
+        reviewDAO.save(post);
 //        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
-        return "redirect:/posts";
+        return "redirect:/view-all-posts";
     }
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
     public String individualPost(@PathVariable long id, Model model) {
-        Post singlePost = postDAO.getPostById(id);
+        Review singlePost = reviewDAO.getPostById(id);
         model.addAttribute("singlePost", singlePost);
-        return "post";
+        return "view-brewery";
     }
 
 }

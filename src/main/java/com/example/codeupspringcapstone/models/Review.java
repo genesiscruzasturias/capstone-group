@@ -5,13 +5,17 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "reviews")
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+//    @Id
+    @Column(name = "rating", nullable = false)
+    private int rating;
 
     @Column(name = "image", nullable = false)
     private String image;
@@ -19,30 +23,53 @@ public class Post {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<Comments> comments;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "review")
+    private List<Likes> likes;
+
+    @ManyToOne
+    @JoinColumn(name = "brewery_id")
+    private Brewery brewery;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
 
     //    CREATING CONSTRUCTORS
-    public Post(){}
-    public Post(String image, String description) {
+    public Review(){}
+    public Review(int rating, String image, String description) {
+        this.rating = rating;
         this.image = image;
         this.description = description;
     }
 
-    public Post(User user, String image, String description) {
+    public Review(User user, int rating, String image, String description) {
         this.user = user;
+        this.rating = rating;
         this.image = image;
         this.description = description;
     }
 
-    public Post(long id, String image, String description) {
+    public Review(User user, int rating, String image, String description, Brewery brewery) {
+        this.user = user;
+        this.rating = rating;
+        this.image = image;
+        this.description = description;
+        this.brewery = brewery;
+    }
+
+    public Review(long id, int rating, String image, String description) {
+        this.rating = rating;
         this.id = id;
         this.image = image;
         this.description = description;
+    }
+
+    public void setRating (int rating) {
+        this.rating = rating;
+    }
+
+    public int getRating () {
+        return rating;
     }
 
     public void setId(Long id) {

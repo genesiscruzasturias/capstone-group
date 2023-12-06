@@ -23,22 +23,27 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "profile_image")
-    private String imgPath;
-
     // CREATING RELATIONSHIPS
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Post> posts;
+    private List<Review> reviews;
 
     // CREATING CONSTRUCTORS
     public User(){}
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
         username = copy.username;
         password = copy.password;
-        posts = copy.posts;
+        reviews = copy.reviews;
     }
 
     public User(String username, String email, String password) {
@@ -51,7 +56,6 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.imgPath = imgPath;
     }
 
     // GETTERS AND SETTERS
@@ -87,11 +91,5 @@ public class User {
         return password;
     }
 
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
-    }
-    public String getImgPath() {
-        return imgPath;
-    }
 
 }
