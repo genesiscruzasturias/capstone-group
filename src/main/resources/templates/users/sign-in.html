@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,12 +7,12 @@
 <body>
     <h1>Sign in to your Account!</h1>
     <div class="login-box">
-        <form method="POST" action="put ur url here">
+        <form th:action="${/sign-in}" method="POST" th:object="${user}">
             <label for="username">Username</label>
-            <input id="username" name="username" type="text">
+            <input id="username" name="username" type="text" th:field="*{username}">
             <br>
             <label for="password">Password</label>
-            <input id="password" name="password" type="password">
+            <input id="password" name="password" type="password" th:field="*{password}">
             <br>
             <input type="submit">
         </form>
