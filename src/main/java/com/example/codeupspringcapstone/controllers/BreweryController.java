@@ -19,7 +19,7 @@ public class BreweryController {
         this.reviewDAO = reviewDAO;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/view-breweries")
     public String homePage () {
         return "view-breweries";
     }
