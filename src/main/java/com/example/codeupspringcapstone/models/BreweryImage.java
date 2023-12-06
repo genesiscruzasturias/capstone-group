@@ -18,7 +18,7 @@ public class BreweryImage {
     private String name;
 
     @OneToOne
-    @JoinColumn (name = "review")
+    @JoinColumn (name = "id")
     private Review review;
 
     public BreweryImage(Long id, String image, String name, Review review) {

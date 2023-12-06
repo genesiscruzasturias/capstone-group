@@ -21,7 +21,7 @@ public class Likes {
     private User user;
 
     @ManyToOne
-    @JoinColumn (name = "review_id")
+    @JoinColumn (name = "id")
     private Review review;
 
 //CREATE CONSTRUCTORS
