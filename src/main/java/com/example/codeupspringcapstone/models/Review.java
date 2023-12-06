@@ -5,15 +5,15 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "reviews")
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Id
+//    @Id
     @Column(name = "rating", nullable = false)
     private int rating;
 
@@ -23,29 +23,29 @@ public class Post {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<Comments> comments;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "review")
+    private List<Likes> likes;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
 
     //    CREATING CONSTRUCTORS
-    public Post(){}
-    public Post(int rating, String image, String description) {
+    public Review(){}
+    public Review(int rating, String image, String description) {
         this.rating = rating;
         this.image = image;
         this.description = description;
     }
 
-    public Post(User user, int rating, String image, String description) {
+    public Review(User user, int rating, String image, String description) {
         this.user = user;
         this.rating = rating;
         this.image = image;
         this.description = description;
     }
 
-    public Post(long id, int rating, String image, String description) {
+    public Review(long id, int rating, String image, String description) {
         this.rating = rating;
         this.id = id;
         this.image = image;

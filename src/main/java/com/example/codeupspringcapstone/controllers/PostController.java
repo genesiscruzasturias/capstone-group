@@ -1,6 +1,6 @@
 package com.example.codeupspringcapstone.controllers;
 
-import com.example.codeupspringcapstone.models.Post;
+import com.example.codeupspringcapstone.models.Review;
 import com.example.codeupspringcapstone.models.User;
 import com.example.codeupspringcapstone.repositories.PostRepository;
 import com.example.codeupspringcapstone.repositories.UserRepository;
@@ -22,19 +22,19 @@ public class PostController {
 
     @GetMapping("/posts")
     public String homePage(Model model) {
-        ArrayList<Post> allPosts = new ArrayList<>(postDAO.findAll());
+        ArrayList<Review> allPosts = new ArrayList<>(postDAO.findAll());
         model.addAttribute("allPosts", allPosts);
         return "index";
     }
 
     @GetMapping("/posts/create")
     public String setPostModel(Model model) {
-        model.addAttribute("post", new Post());
+        model.addAttribute("post", new Review());
         return "create-posts";
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post){
+    public String createPost(@ModelAttribute Review post){
         User user = userDAO.getUsersById(1L);
         post.setUser(user);
         postDAO.save(post);
@@ -44,7 +44,7 @@ public class PostController {
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
     public String individualPost(@PathVariable long id, Model model) {
-        Post singlePost = postDAO.getPostById(id);
+        Review singlePost = postDAO.getPostById(id);
         model.addAttribute("singlePost", singlePost);
         return "post";
     }

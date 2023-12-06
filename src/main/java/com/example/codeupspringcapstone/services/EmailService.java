@@ -1,6 +1,6 @@
 package com.example.codeupspringcapstone.services;
 
-import com.example.codeupspringcapstone.models.Post;
+import com.example.codeupspringcapstone.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -18,7 +18,7 @@ public class EmailService {
     private String from;
 
 
-    public void prepareAndSend(Post post, String title, String body) {
+    public void prepareAndSend(Review post, String title, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
         msg.setTo(post.getUser().getEmail());
