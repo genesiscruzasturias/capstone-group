@@ -1,4 +1,8 @@
 package com.example.codeupspringcapstone.repositories;
 
-public interface BreweryRepository {
+import com.example.codeupspringcapstone.models.Brewery;
+//import com.example.codeupspringcapstone.models.Review;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BreweryRepository extends JpaRepository<Brewery, Long> {
 }
