@@ -13,8 +13,8 @@ public class Likes {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "like", nullable = false)
-    private String like;
+    @Column(name = "likes", nullable = false)
+    private int likes;
 
     @OneToOne
     @JoinColumn (name = "user_id")
@@ -27,9 +27,9 @@ public class Likes {
 //CREATE CONSTRUCTORS
 
 
-    public Likes(Long id, String like, User user, Review review) {
+    public Likes(Long id, int likes, User user, Review review) {
         this.id = id;
-        this.like = like;
+        this.likes = likes;
         this.user = user;
         this.review = review;
     }
@@ -45,12 +45,12 @@ public class Likes {
         this.id = id;
     }
 
-    public String getLike() {
-        return like;
+    public int getLikes() {
+        return likes;
     }
 
-    public void setLike(String like) {
-        this.like = like;
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     public User getUser() {

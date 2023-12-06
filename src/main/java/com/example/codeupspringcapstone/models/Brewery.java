@@ -2,6 +2,8 @@ package com.example.codeupspringcapstone.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "breweries")
 

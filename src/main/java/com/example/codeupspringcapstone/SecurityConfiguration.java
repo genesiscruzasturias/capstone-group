@@ -46,7 +46,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
                 /* Login configuration */
-                .formLogin((login) -> login.loginPage("/sign-in").defaultSuccessUrl("/users/profile"))
+                .formLogin((login) -> login.loginPage("/sign-in").defaultSuccessUrl("/profile"))
                 /* Logout configuration */
                 .logout((logout) -> logout.logoutSuccessUrl("/sign-in"))
                 .httpBasic(withDefaults());
