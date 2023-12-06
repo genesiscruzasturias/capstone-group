@@ -27,6 +27,10 @@ public class Review {
     private List<Likes> likes;
 
     @ManyToOne
+    @JoinColumn(name = "brewery_id")
+    private Brewery brewery;
+
+    @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
 
@@ -43,6 +47,14 @@ public class Review {
         this.rating = rating;
         this.image = image;
         this.description = description;
+    }
+
+    public Review(User user, int rating, String image, String description, Brewery brewery) {
+        this.user = user;
+        this.rating = rating;
+        this.image = image;
+        this.description = description;
+        this.brewery = brewery;
     }
 
     public Review(long id, int rating, String image, String description) {
