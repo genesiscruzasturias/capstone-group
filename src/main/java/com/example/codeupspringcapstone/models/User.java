@@ -28,7 +28,7 @@ public class User {
 
     // CREATING RELATIONSHIPS
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Post> posts;
+    private List<Review> posts;
 
     // CREATING CONSTRUCTORS
     public User(){}

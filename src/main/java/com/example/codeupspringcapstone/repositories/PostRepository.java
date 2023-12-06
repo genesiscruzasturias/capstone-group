@@ -1,10 +1,10 @@
 package com.example.codeupspringcapstone.repositories;
 
-import com.example.codeupspringcapstone.models.Post;
+import com.example.codeupspringcapstone.models.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PostRepository extends JpaRepository<Review, Long> {
 
-    Post getPostById(long id);
+    Review getPostById(long id);
 
 }
