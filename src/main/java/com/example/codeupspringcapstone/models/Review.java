@@ -26,9 +26,8 @@ public class Review {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "review")
     private List<Likes> likes;
 
-    @ManyToOne
-    @JoinColumn(name = "brewery_id")
-    private Brewery brewery;
+   @Column(name = "brewery_id", nullable = false)
+    private String brewery;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
@@ -49,19 +48,41 @@ public class Review {
         this.description = description;
     }
 
-    public Review(User user, int rating, String image, String description, Brewery brewery) {
-        this.user = user;
-        this.rating = rating;
-        this.image = image;
-        this.description = description;
-        this.brewery = brewery;
-    }
-
     public Review(long id, int rating, String image, String description) {
         this.rating = rating;
         this.id = id;
         this.image = image;
         this.description = description;
+    }
+
+    public Review(Long id, int rating, String image, String description, List<Likes> likes, String brewery, User user) {
+        this.id = id;
+        this.rating = rating;
+        this.image = image;
+        this.description = description;
+        this.likes = likes;
+        this.brewery = brewery;
+        this.user = user;
+    }
+
+    public Review(String description) {
+        this.description = description;
+    }
+
+    public List<Likes> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Likes> likes) {
+        this.likes = likes;
+    }
+
+    public String getBrewery() {
+        return brewery;
+    }
+
+    public void setBrewery(String brewery) {
+        this.brewery = brewery;
     }
 
     public void setRating (int rating) {
@@ -99,4 +120,7 @@ public class Review {
     public void setUser (User user) { this.user = user; }
 
     public User getUser() { return user; }
+
+    public void setId(String breweryId) {
+    }
 }
