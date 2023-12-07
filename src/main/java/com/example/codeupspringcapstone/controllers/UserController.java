@@ -42,4 +42,16 @@ public class UserController {
         return "users/profile";
     }
 
+    @GetMapping("/profile/edit")
+    public String editProfile(Model model) {
+        model.addAttribute("user", new User());
+        return "users/edit-profile";
+    }
+
+    @PostMapping("/profile/edit")
+    public String saveEditedProfile(@ModelAttribute User user) {
+        userDao.save(user);
+        return "redirect:users/profile";
+    }
+
 }
