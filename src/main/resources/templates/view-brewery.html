@@ -7,12 +7,7 @@
 
 </head>
 <body>
-
-    <div th:each="item : ${brewery}">
-        <p th:text="${item.name}"></p>
-        <p th:hidden="true" class="videoTitle" th:text="${post.getTitle()}"></p>
-        <p th:hidden="true" class="videoTitle" th:text="${post.getUser()}"></p>
-
+    <div id="breweryInfo">
     </div>
 
 <script src="/js/brewery_info.js"></script>

@@ -7,9 +7,7 @@ import com.example.codeupspringcapstone.repositories.UserRepository;
 import com.example.codeupspringcapstone.repositories.BreweryRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class BreweryController {
@@ -38,8 +36,7 @@ public class BreweryController {
     }
 
     @GetMapping("/view-brewery")
-    public String viewBrewery (Model model, Brewery breweryModel) {
-        model.addAttribute("brewery", breweryModel);
+    public String viewBrewery () {
         return "view-brewery";
     }
 
