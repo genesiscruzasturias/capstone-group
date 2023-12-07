@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,9 +28,18 @@
     <div id="results"></div>
 </div>
 
-
+<div th:hidden="true" id="sendToJavaForm">
+    <form th:hidden="true" id="breweryForm" th:method="post" th:action="@{/view-breweries}" th:object="${breweryModel}">
+        <input id="breweryNameInput" th:type="text" th:field="*{name}">
+        <input id="breweryAddress" th:type="text" th:field="*{address}">
+        <input id="breweryPhone" th:type="text" th:field="*{phoneNumber}">
+        <input id="breweryCity" th:type="text" th:field="*{city}">
+        <input id="breweryState" th:type="text" th:field="*{state}">
+        <input id="breweryPostal" th:type="text" th:field="*{postalCode}">
+        <input id="breweryUrl" th:type="text" th:field="*{url}">
+    </form>
+</div>
 
 <script src="/js/brew.js"></script>
-
 </body>
 </html>
