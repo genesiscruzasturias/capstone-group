@@ -20,7 +20,7 @@ public class Brewery {
     private String address;
 
     @Column(name = "phone_number", nullable = false)
-    private int phoneNumber;
+    private String phoneNumber;
 
     @Column(name = "city", nullable = false)
     private String city;
@@ -34,8 +34,18 @@ public class Brewery {
     @Column(name = "url", nullable = false)
     private String url;
 
-    public Brewery(Long id, String name, String address, int phoneNumber, String city, String state, int postalCode, String url) {
+    public Brewery(Long id, String name, String address, String phoneNumber, String city, String state, int postalCode, String url) {
         this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.city = city;
+        this.state = state;
+        this.postalCode = postalCode;
+        this.url = url;
+    }
+
+    public Brewery(String name, String address, String phoneNumber, String city, String state, int postalCode, String url) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -72,11 +82,11 @@ public class Brewery {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

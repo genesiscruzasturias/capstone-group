@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>view-brewery</title>
+    <title>Brewery Page</title>
 
 </head>
 <body>
-<div class="container">
-    <div id="breweryInfo"></div>
-</div>
 
-<script src="brewery_info.js"></script>
+    <div th:each="item : ${brewery}">
+        <p th:text="${item.name}"></p>
+        <p th:hidden="true" class="videoTitle" th:text="${post.getTitle()}"></p>
+        <p th:hidden="true" class="videoTitle" th:text="${post.getUser()}"></p>
+
+    </div>
+
+<script src="/js/brewery_info.js"></script>
 
 </body>
 </html>

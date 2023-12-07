@@ -1,10 +1,15 @@
 package com.example.codeupspringcapstone.controllers;
 
+import com.example.codeupspringcapstone.models.Brewery;
+import com.example.codeupspringcapstone.models.User;
 import com.example.codeupspringcapstone.repositories.ReviewRepository;
 import com.example.codeupspringcapstone.repositories.UserRepository;
 import com.example.codeupspringcapstone.repositories.BreweryRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BreweryController {
@@ -20,8 +25,22 @@ public class BreweryController {
     }
 
     @GetMapping("/view-breweries")
-    public String homePage () {
+    public String homePage (Model model) {
+        model.addAttribute("breweryModel", new Brewery());
         return "view-breweries";
+    }
+
+    @PostMapping("/view-breweries")
+    public String createBreweryModel(@ModelAttribute Brewery breweryModel, Model model) {
+        model.addAttribute("model", breweryModel);
+        breweryDAO.save(breweryModel);
+        return "redirect:/view-brewery";
+    }
+
+    @GetMapping("/view-brewery")
+    public String viewBrewery (Model model, Brewery breweryModel) {
+        model.addAttribute("brewery", breweryModel);
+        return "view-brewery";
     }
 
 }
