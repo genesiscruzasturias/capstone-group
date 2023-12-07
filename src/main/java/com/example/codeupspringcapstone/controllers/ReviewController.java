@@ -30,7 +30,7 @@ public class ReviewController {
     @GetMapping("/reviews/create")
     public String setPostModel(Model model) {
         model.addAttribute("post", new Review());
-        return "create-posts";
+        return "create-review";
     }
 
     @PostMapping("/reviews/create")

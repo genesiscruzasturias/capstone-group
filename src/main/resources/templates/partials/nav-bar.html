@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<head th:fragment="head">-->
+<!--  <meta charset="UTF-8" />-->
+<!--  <title>Home</title>-->
+<!--  &lt;!&ndash; include stylesheets, etc here &ndash;&gt;-->
+<!--</head>-->
+<body>
+  <th:block th:if="${session.user == null}">
+    <li>Brew-Hop</li>
+    <li><a th:href="@{/index.html}">Home</a></li>
+    <li><a th:href="@{/view-breweries.html}">Search Breweries</a></li>
+    <li><a th:href="@{/sign-up.html}">Register</a></li>
+    <li><a th:href="@{/sign-in.html}">Sign in</a></li>
+  </th:block>
+  <th:block th:if="${session.user != null}">
+    <li>Brew-Hop</li>
+    <li><a th:href="@{/index.html}">Home</a></li>
+    <li><a th:href="@{/view-breweries.html}">Search</a></li>
+    <li><a th:href="@{/users/profile.html}">Profile</a></li>
+    <li><a th:href="@{/templates/create-review.html}">Create Post</a></li>
+    <li><a th:href="@{/logout.html}">Logout</a></li>
+  </th:block>
+</body>
+</html>

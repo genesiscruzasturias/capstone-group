@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +7,16 @@
 
 </head>
 <body>
-    <div id="breweryInfo">
-    </div>
+    <div id="breweryInfo"></div>
+<form th:action="@{/view-brewery}" th:method="post">
+    <input th:type="text">
+<!--    Username: <span th:text="${#authentication.principal.username}"/>-->
 
+<!--        Description: <input th:type="text" th:field="*{description}">-->
+<!--        Body: <input type="text" th:field="*{body}" id="body">-->
+
+    <input th:type="submit">
+</form>
 <script src="/js/brewery_info.js"></script>
 
 </body>
