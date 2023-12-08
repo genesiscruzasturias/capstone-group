@@ -5,7 +5,14 @@
     <title>Sign up</title>
 </head>
 <body>
-<nav th:replace="/partials/nav-bar.html :: navbar"></nav>
+
+<nav>
+    <ul>
+        <li>
+            <a th:href="@{/home}" th:method="get">Home</a>
+        </li>
+    </ul>
+</nav>
 
 <h1>Create an account</h1>
 <form th:action="@{/sign-up}" method="POST" th:object="${user}">

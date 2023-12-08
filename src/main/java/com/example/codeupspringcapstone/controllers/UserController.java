@@ -22,6 +22,7 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    //Despite this beingset up looking the right way, it still isn't connecting well on the nav bar.
     @GetMapping("/sign-up")
     public String showSignupForm(Model model) {
         model.addAttribute("user", new User());
@@ -55,7 +56,7 @@ public class UserController {
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
         userDao.save(user);
-        return "redirect:/login";
+        return "redirect:users/sign-up";
     }
 
     @GetMapping("/profile")

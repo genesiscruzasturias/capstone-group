@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
+<head>
+  <meta charset="UTF-8">
+  <title>Brew-Hop</title>
+</head>
 <body>
-<div th:fragment="nav-bar">
+<div th:fragment="nav-bar" th:unless="${#authorization.expression('isAuthenticated()')}">
   <ul>
     <li>Brew-Hop</li>
-
-    <!-- Conditionally render links based on user authentication -->
-    <th:block th:if="${session.user == null}">
-      <li><a href="/index" th:method="get">Home</a></li>
+      <li><a th:href="@{/index}" th:method="get">Home</a></li>
       <li><a th:href="@{/view-breweries}" th:method="get">Search Breweries</a></li>
-      <li><a th:href="@{/sign-up}" th:method="get">Register</a></li>
+      <li><a th:href="@{/sign-up}" th:method="get">Sign up</a></li>
       <li><a th:href="@{/sign-in}" th:method="get">Sign in</a></li>
-    </th:block>
+  </ul>
+</div>
 
-    <th:block th:if="${session.user != null}">
+<div th:fragment="nav-bar2" th:if="${#authorization.expression('isAuthenticated()')}">
+  <ul>
+    <li>Brew-Hop</li>
       <li><a th:href="@{/index}" th:method="post">Home</a></li>
       <li><a th:href="@{/view-breweries}" th:method="post">Search</a></li>
       <li><a th:href="@{/users/profile}" th:method="post">Profile</a></li>
-      <li><a th:href="@{/templates/create-review}" th:method="post">Create Post</a></li>
       <li><a th:href="@{/logout}" th:method="post">Logout</a></li>
-    </th:block>
   </ul>
 </div>
 </body>
