@@ -8,7 +8,7 @@
 <div th:fragment="nav-bar" th:unless="${#authorization.expression('isAuthenticated()')}">
   <ul>
     <li>Brew-Hop</li>
-      <li><a th:href="@{/index}" th:method="get">Home</a></li>
+      <li><a th:href="@{/}" th:method="get">Home</a></li>
       <li><a th:href="@{/view-breweries}" th:method="get">Search Breweries</a></li>
       <li><a th:href="@{/sign-up}" th:method="get">Sign up</a></li>
       <li><a th:href="@{/sign-in}" th:method="get">Sign in</a></li>
@@ -18,7 +18,7 @@
 <div th:fragment="nav-bar2" th:if="${#authorization.expression('isAuthenticated()')}">
   <ul>
     <li>Brew-Hop</li>
-      <li><a th:href="@{/index}" th:method="post">Home</a></li>
+      <li><a th:href="@{/}" th:method="post">Home</a></li>
       <li><a th:href="@{/view-breweries}" th:method="post">Search</a></li>
       <li><a th:href="@{/users/profile}" th:method="post">Profile</a></li>
       <li><a th:href="@{/logout}" th:method="post">Logout</a></li>
