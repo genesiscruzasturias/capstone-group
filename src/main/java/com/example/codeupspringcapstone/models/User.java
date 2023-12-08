@@ -1,6 +1,7 @@
 package com.example.codeupspringcapstone.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -15,12 +16,15 @@ public class User {
     private Long id;
 
     @Column(name = "username", nullable = false, unique = true)
+    @NotBlank(message = "Username is required")
     private String username;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
+    @NotBlank(message = "Email is required")
     private String email;
 
     @Column(name = "password", nullable = false)
+    @NotBlank(message = "Password is required")
     private String password;
 
     // CREATING RELATIONSHIPS
