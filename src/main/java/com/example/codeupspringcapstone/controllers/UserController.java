@@ -56,7 +56,7 @@ public class UserController {
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
         userDao.save(user);
-        return "redirect:users/sign-up";
+        return "redirect:/sign-in";
     }
 
     @GetMapping("/profile")
