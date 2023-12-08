@@ -2,11 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Brew-Hop</title>
 </head>
 <body>
     <div class="container">
-        upper box for hero
+        <div th:insert="partials/nav-bar.html :: nav-bar">
+        </div>
+        <!--upper box for hero-->
         <div class="hero-top">
             <div class="welcome-box">
                 <h1>Welcome to <span>Brew-Hop</span>!</h1>
