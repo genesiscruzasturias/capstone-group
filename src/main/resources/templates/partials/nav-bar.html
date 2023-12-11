@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
-<head>
-  <meta charset="UTF-8">
-  <title>Brew-Hop</title>
-</head>
 <body>
-<div th:fragment="nav-bar" th:unless="${#authorization.expression('isAuthenticated()')}">
+<div th:fragment="nav-bar" th:unless="${#authorization.expression('isAuthenticated()')}" class="nav-bar">
   <ul>
-    <li>Brew-Hop</li>
-      <li><a th:href="@{/}" th:method="get">Home</a></li>
-      <li><a th:href="@{/view-breweries}" th:method="get">Search Breweries</a></li>
-      <li><a th:href="@{/sign-up}" th:method="get">Sign up</a></li>
-      <li><a th:href="@{/sign-in}" th:method="get">Sign in</a></li>
+      <span class="nav-brew-hop">Brew-Hop</span>
+      <a th:href="@{/}" th:method="get">Home</a>
+      <a th:href="@{/view-breweries}" th:method="get">Search Breweries</a>
+      <a th:href="@{/sign-up}" th:method="get">Sign up</a>
+      <a th:href="@{/sign-in}" th:method="get">Sign in</a>
   </ul>
 </div>
 
-<div th:fragment="nav-bar2" th:if="${#authorization.expression('isAuthenticated()')}">
+<div th:fragment="nav-bar2" th:if="${#authorization.expression('isAuthenticated()')}" class="nav-bar">
   <ul>
-    <li>Brew-Hop</li>
-      <li><a th:href="@{/}" th:method="post">Home</a></li>
-      <li><a th:href="@{/view-breweries}" th:method="post">Search</a></li>
-      <li><a th:href="@{/users/profile}" th:method="post">Profile</a></li>
-      <li><a th:href="@{/logout}" th:method="post">Logout</a></li>
+      <span class="nav-brew-hop">Brew-Hop</span>
+      <a th:href="@{/}" th:method="post">Home</a>
+      <a th:href="@{/view-breweries}" th:method="post">Search</a>
+      <a th:href="@{/profile}" th:method="get">Profile</a>
+      <form th:action="@{/logout}" th:method="post">
+        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+      </form>
   </ul>
 </div>
 </body>
