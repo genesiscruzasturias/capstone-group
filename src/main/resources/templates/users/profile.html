@@ -3,6 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <nav th:insert="partials/nav-bar.html :: nav-bar"></nav>
@@ -16,6 +47,31 @@
                     <button><a th:href="@{/profile/edit}">Edit Profile</a></button>
                 </div>
             </div>
+            <div th:each="review : ${userReviews}">
+                <p>
+                    <a th:href="@{'/edit/' + ${review.id}}" th:text="${review.description}"></a>
+                    <!-- Add more details as needed -->
+                </p>
+            </div>
         </div>
+        <button id="myBtn">Edit Post</button>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div th:each="review : ${userReviews}">
+                    <p>
+                        <a th:href="@{'#'}" data-toggle="modal" data-target="#editPostModal" th:attr="data-review-id=${review.id}, data-review-title=${review.description}, data-review-content=${review.rating}">
+                            <span th:text="${review.description}"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+<script src="/js/edit-modal.js"></script>
+
 </body>
 </html>

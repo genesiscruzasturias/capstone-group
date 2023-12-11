@@ -8,15 +8,11 @@
 </head>
 <body>
     <div id="breweryInfo"></div>
-<form th:action="@{/view-brewery}" th:method="post">
-    <input th:type="text">
-<!--    Username: <span th:text="${#authentication.principal.username}"/>-->
 
-<!--        Description: <input th:type="text" th:field="*{description}">-->
-<!--        Body: <input type="text" th:field="*{body}" id="body">-->
-
-    <input th:type="submit">
-</form>
+        <form id="brewIDGet" th:action="@{/create}" th:method="get">
+            <input id="brewFormID" type="hidden">
+            <button type="submit">Write A Review</button>
+        </form>
 <script src="/js/brewery_info.js"></script>
 
 </body>

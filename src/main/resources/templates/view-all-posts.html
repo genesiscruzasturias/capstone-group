@@ -7,11 +7,11 @@
 <body>
 <!--<nav th:replace="partials/navbar :: navbar"></nav>-->
 
-<div th:each="post : ${posts}">
-    <h1 th:text="${post.title}"></h1>
+<div th:each="review : ${reviews}">
+    <h1 th:text="${reviews}"></h1>
     <p th:text="${post.body}"></p>
     <img th:src="${url_to_your_image}" alt="Image">
 </div>
-
+<a th:href="@{/edit/{id}(id=${review.getId()})}">Edit</a>
 </body>
 </html>

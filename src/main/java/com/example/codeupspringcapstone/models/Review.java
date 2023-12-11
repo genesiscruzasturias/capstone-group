@@ -14,19 +14,19 @@ public class Review {
     private Long id;
 
 //    @Id
-    @Column(name = "rating", nullable = false)
+    @Column(name = "rating")
     private int rating;
 
     @Column(name = "image", nullable = false)
     private String image;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "review")
     private List<Likes> likes;
 
-   @Column(name = "brewery_id", nullable = false)
+   @Column(name = "brewery_id", nullable = true)
     private String brewery;
 
     @ManyToOne

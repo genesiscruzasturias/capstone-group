@@ -6,13 +6,32 @@
 </head>
 <body>
     <h1>Create a post!</h1>
+    <div id="breweryInfo"></div>
 
-    <form method="post" action="">
-        <span>Private</span><input name="newsletter_signup" value="true" type="checkbox" checked>
-        <label for="description">description</label>
-        <input id="description" name="description" type="text">
-        <br>
-        <input type="submit">
-    </form>
+        <form id="create-review" th:action="@{/view-brewery}" th:method="post" th:object="${review}">
+            <input type="hidden"  id="brewFormID" name="breweryId" th:value="${breweryId}">
+        <input id="description" th:type="text" th:field="*{description}">
+<!--            <label for="description">Description:</label>-->
+<!--            <input type="text" th:field="*{description}">-->
+<!--            <input type="text" th:field="*{description}">-->
+    <!--    Username: <span th:text="${#authentication.principal.username}"/>-->
+
+<!--            Description: <input type="text" th:field="*{description}">-->
+    <!--        Body: <input type="text" th:field="*{body}" id="body">-->
+<!--            Add submit button and add event listener-->
+        <input type="submit" id="submit-button">
+    </form >
+
+
+
+<!--    <form method="post" action="">-->
+<!--        <span>Private</span><input name="newsletter_signup" value="true" type="checkbox" checked>-->
+<!--        <label for="description">description</label>-->
+<!--        <input id="description" name="description" type="text">-->
+<!--        <br>-->
+<!--        <input type="submit">-->
+<!--    </form>-->
+    <script src="static/js/brewery_info.js"></script>
+
 </body>
 </html>

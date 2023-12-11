@@ -27,19 +27,32 @@ public class ReviewController {
         return "index";
     }
 
-    @GetMapping("/reviews/create")
+    @GetMapping("/create")
     public String setPostModel(Model model) {
-        model.addAttribute("post", new Review());
+        String defaultId = "default_id";
+        model.addAttribute("review", new Review());
+        model.addAttribute("breweryId", defaultId);
+
         return "create-review";
     }
 
-    @PostMapping("/reviews/create")
-    public String createPost(@ModelAttribute Review post){
+    @PostMapping("/create")
+    public String createPost(@ModelAttribute Review review, Model model, @RequestParam String breweryId){
         User user = userDAO.getUsersById(1L);
-        post.setUser(user);
-        reviewDAO.save(post);
+        Review newReview = new Review();
+//        String breweryId = "random-brewery-id";
+        review = reviewDAO.getPostById(1L);
+        newReview.setBrewery(breweryId);
+        newReview.setUser(user);
+        newReview.setDescription(review.getDescription());
+        newReview.setImage("image.jpg");
+        newReview.setRating(10);
+        reviewDAO.save(newReview);
+//        model.addAttribute("brewery", brewery);
+        model.addAttribute("review", newReview);
+//        model.
 //        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
-        return "redirect:/view-all-posts";
+        return "redirect:/view-brewery?brewery=" + breweryId;
     }
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
