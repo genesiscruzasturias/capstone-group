@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="partials/head.html :: header"></head>
 <body>
+<!--    <div th:insert="partials/head.html :: header"></div>-->
     <div class="container">
-        upper box for hero
+        <nav th:insert="partials/nav-bar.html :: nav-bar2"></nav>
+        <nav th:insert="partials/nav-bar.html :: nav-bar"></nav>
+
+        <!--upper box for hero-->
         <div class="hero-top">
             <div class="welcome-box">
                 <h1>Welcome to <span>Brew-Hop</span>!</h1>

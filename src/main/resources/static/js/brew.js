@@ -49,22 +49,6 @@ function searchBreweries() {
                 let viewBtn = breweryCard.querySelector("button");
                 viewBtn.addEventListener("click", function () {
 
-                    // let breweryNameInput = document.getElementById('breweryNameInput');
-                    // breweryNameInput.value = brewery.name;
-                    // let breweryAddress = document.getElementById('breweryAddress');
-                    // breweryAddress.value = brewery.street;
-                    // let breweryPhone = document.getElementById('breweryPhone');
-                    // breweryPhone.value = formattedPhone;
-                    // let breweryCity = document.getElementById('breweryCity');
-                    // breweryCity.value = brewery.city;
-                    // let breweryState = document.getElementById('breweryState');
-                    // breweryState = brewery.state;
-                    // let breweryPostal = document.getElementById('breweryPostal');
-                    // breweryPostal.value = brewery.postal_code;
-                    // let breweryUrl = document.getElementById('breweryUrl');
-                    // breweryUrl.value = brewery.website_url;
-                    //
-                    // document.forms["breweryForm"].submit();
 
                  })
                 })

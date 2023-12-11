@@ -5,20 +5,29 @@
     <title>Sign up</title>
 </head>
 <body>
-<!--<nav th:replace="partials/navbar :: navbar"></nav>-->
+<nav>
+    <ul>
+        <li>
+            <a th:href="@{/}" th:method="get">Home</a>
+        </li>
+    </ul>
+</nav>
 
 <h1>Create an account</h1>
 <form th:action="@{/sign-up}" method="POST" th:object="${user}">
     <label for="username">Username</label>
-    <input id="username" th:field="*{username}" />
+    <input id="username" th:field="*{username}" required/>
+    <p th:if="${usernameError}" th:text="${usernameError}" class="error"></p>
 
     <label for="email">Email</label>
-    <input id="email" th:field="*{email}" />
+    <input id="email" th:field="*{email}" required/>
+    <p th:if="${emailError}" th:text="${emailError}" class="error"></p>
 
     <label for="password">Password</label>
-    <input id="password" type="password" th:field="*{password}" />
+    <input id="password" type="password" th:field="*{password}" required/>
 
     <input value="Sign me up!" type="submit" />
 </form>
+<p>Already have an account? <a href="/sign-in">Sign in here!</a></p>
 </body>
 </html>

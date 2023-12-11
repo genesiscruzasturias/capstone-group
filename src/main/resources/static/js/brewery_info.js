@@ -6,16 +6,19 @@
     // document.getElementById('breweryIDfromJS').value = breweryID;
     document.getElementById('brewFormID').value = breweryID
 
+
     if (!breweryID) {
         console.error('Error: Brewery ID is null or undefined');
     }else {
-        fetch('https://api.openbrewerydb.org/v1/breweries/' + breweryID)
-            .then(response => response.json())
-            .then(brewery => {
-                const formattedPhone = brewery.phone ? formatPhoneNumber(brewery.phone) : 'N/A';
+       
+    fetch('https://api.openbrewerydb.org/v1/breweries/' + breweryID)
+        .then(response => response.json())
+        .then(brewery => {
+            const formattedPhone = brewery.phone ? formatPhoneNumber(brewery.phone) : 'N/A';
 
-                const breweryInfoDiv = document.getElementById('breweryInfo');
-                breweryInfoDiv.innerHTML = `
+
+            const breweryInfoDiv = document.getElementById('breweryInfo');
+            breweryInfoDiv.innerHTML = `
                     <h2>${brewery.name}</h2>
                     <p>
                         Type: ${brewery.brewery_type}<br>
@@ -25,6 +28,7 @@
                                  ${brewery.postal_code}<br>
                         Website: ${brewery.website_url ? `<a href="${brewery.website_url}" target="_blank">${brewery.website_url}</a>` : 'N/A'}<br>
                         Phone: ${formattedPhone}
+
                     </p>`;
                 document.getElementById("create-review").submit();
                 console.log(breweryID);
@@ -32,7 +36,9 @@
             .catch(error => console.error('Error:', error));
     }
 
-function formatPhoneNumber(phoneNumber) {
+
+
+    function formatPhoneNumber(phoneNumber) {
     const cleaned = ('' + phoneNumber).replace(/\D/g, '');
     const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
     if (match) {

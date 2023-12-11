@@ -36,19 +36,16 @@
     </style>
 </head>
 <body>
+    <nav th:insert="partials/nav-bar.html :: nav-bar"></nav>
     <div class="container">
         <div class="profileBox-container">
-            <div class="pfp"></div>
-            <div class="user=info">
-                <span th:text="${username}">Username</span>
-                <span th:text="${user.email}">User Email</span>
-                <span th:text="${user.password}">Password
-                </span>
-                <a ref="/change-user-info">Edit user information</a>
-            </div>
-            <div class="achievements-box">
-                <h2>Achievements</h2>
-                <div class="achievements-show"></div>
+            <div class="pfp">Profile Picture</div>
+                <div class="user=info">
+                   <h1><span th:text="${user.username}"></span></h1>
+                    <p th:text="${user.email}"></p>
+                    <p th:text="${user.password}"></p>
+                    <button><a th:href="@{/profile/edit}">Edit Profile</a></button>
+                </div>
             </div>
             <div th:each="review : ${userReviews}">
                 <p>
@@ -72,7 +69,9 @@
             </div>
 
         </div>
-    </div>
+
+
 <script src="/js/edit-modal.js"></script>
+
 </body>
 </html>

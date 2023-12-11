@@ -32,6 +32,7 @@ public class ReviewController {
         String defaultId = "default_id";
         model.addAttribute("review", new Review());
         model.addAttribute("breweryId", defaultId);
+
         return "create-review";
     }
 
