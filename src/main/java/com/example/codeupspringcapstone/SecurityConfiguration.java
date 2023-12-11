@@ -40,20 +40,13 @@ public class SecurityConfiguration {
                         .requestMatchers("/", "/reviews", "/reviews/*", "/sign-up", "/sign-in", "/view-breweries").permitAll()
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
-//<<<<<<< HEAD
-                        .requestMatchers("/reviews/create", "/reviews/*/edit","/profile", "/edit-profile").authenticated()
-//=======
-//>>>>>>> 4ddebbdcfb8e18bce5ca375744ad1e0efe82063d
-                        /* Pages that do not require authentication
-                         * anyone can visit the home page, register, login, and view ads */
-//                        .requestMatchers("/", "/reviews", "/reviews/*", "/sign-up", "/sign-in", "/view-breweries", "/view-brewery").permitAll()
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
                 /* Login configuration */
                 .formLogin((login) -> login.loginPage("/sign-in").defaultSuccessUrl("/profile"))
                 /* Logout configuration */
-                .logout((logout) -> logout.logoutSuccessUrl("/"))
+                .logout((logout) -> logout.logoutSuccessUrl("/sign-in"))
                 .httpBasic(withDefaults());
         return http.build();
     }
