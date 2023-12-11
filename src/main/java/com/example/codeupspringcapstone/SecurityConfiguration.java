@@ -36,7 +36,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
-                                .requestMatchers("/reviews/create", "/reviews/*/edit","/profile", "/view-brewery").authenticated()
+                                .requestMatchers("/reviews/create", "/reviews/*/edit","/profile", "/view-brewery", "/create").authenticated()
                         .requestMatchers("/", "/reviews", "/reviews/*", "/sign-up", "/sign-in", "/view-breweries").permitAll()
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */

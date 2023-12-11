@@ -46,18 +46,26 @@ public class BreweryController {
     }
 
     @PostMapping("/view-brewery")
-    public String viewBrewery (@RequestParam String breweryId) {
+    public String viewBrewery (@ModelAttribute Review review, Model model, @RequestParam String breweryId) {
         User user = userDAO.getUsersById(1L);
-//        Brewery brewery = breweryDAO.getBreweryByBrewery_id(breweryId);
-        Review review = new Review();
-//        review.set(breweryId);
+////        Brewery brewery = breweryDAO.getBreweryByBrewery_id(breweryId);
+////        review.set(breweryId);
+//        String breweryId = "random_brewery_id";
         review.setBrewery(breweryId);
         review.setUser(user);
+        review.setDescription(review.getDescription());
+        review.setImage("image.jpg");
+        review.setRating(10);
         reviewDAO.save(review);
 //        model.addAttribute("brewery", brewery);
-//        model.addAttribute("review", review);
+        model.addAttribute("review", reviewDAO.findAll());
 //        model.
         return "redirect:/view-brewery";
     }
+
+//   @GetMapping("/edit-brewery/{id}")
+//    public String editBreweryPost(@PathVariable Long id, Model model){
+//
+//    }
 
 }
