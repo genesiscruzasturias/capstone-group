@@ -1,9 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
-<header th:replace="partials/head.html :: header"></header>
+<head>
+    <style>
+        /* The Modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<header th:replace="~{partials/head.html :: header}">
+</header>
 <body>
-    <nav th:insert="partials/nav-bar.html :: nav-bar2"></nav>
-    <nav th:insert="partials/nav-bar.html :: nav-bar"></nav>
+
+    <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
+    <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
+
     <div class="container">
         <div class="profileBox-container">
             <div class="pfp">Profile Picture</div>
@@ -14,30 +58,43 @@
                     <button><a th:href="@{/profile/edit}">Edit Profile</a></button>
                 </div>
             </div>
-            <div th:each="review : ${userReviews}">
-                <p>
-                    <a th:href="@{'/edit/' + ${review.id}}" th:text="${review.description}"></a>
-                    <!-- Add more details as needed -->
-                </p>
-            </div>
         </div>
-        <button id="myBtn">Edit Post</button>
+
         <!-- The Modal -->
-        <div id="myModal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <div th:each="review : ${userReviews}">
-                    <p>
-                        <a th:href="@{'#'}" data-toggle="modal" data-target="#editPostModal" th:attr="data-review-id=${review.id}, data-review-title=${review.description}, data-review-content=${review.rating}">
-                            <span th:text="${review.description}"></span>
-                        </a>
-                    </p>
-                </div>
-            </div>
+<!--    <div id="editPostModal" class="modal">-->
+<!--        <div class="modal-content">-->
+<!--            &lt;!&ndash; Content for editing post &ndash;&gt;-->
+<!--            <label for="editedBrewery">Brewery Id:</label>-->
+<!--            <input type="text" id="editedBrewery" name="editedBrewery" required>-->
 
+<!--            <label for="editedDescription">Description:</label>-->
+<!--            <textarea id="editedDescription" name="editedDescription" required></textarea>-->
+
+<!--            <button id="saveChangesBtn">Save Changes</button>-->
+<!--        </div>-->
+<!--    </div>-->
+    <!-- Trigger/Open The Modal -->
+    <div th:each="review : ${userReviews}">
+    <button id="myBtn" class="open-modal-btn" data-review-id="${review.id}" data-review-brewery="${review.brewery}" data-review-description="${review.description}">Edit Post</button>
+        <span th:text="${review.description}"></span>
+
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="editPostForm">
+                <label for="editedBrewery">Brewery Id:</label>
+                <input type="text" id="editedBrewery" name="editedBrewery" required th:value="${reviewBrewery}">
+
+                <label for="editedDescription">Description:</label>
+                <textarea id="editedDescription" name="editedDescription" required th:text="${reviewDescription}"></textarea>
+
+                <button type="submit">Save Changes</button>
+            </form>
         </div>
-
-
+    </div>
+    </div>
 <script src="/js/edit-modal.js"></script>
 
 </body>

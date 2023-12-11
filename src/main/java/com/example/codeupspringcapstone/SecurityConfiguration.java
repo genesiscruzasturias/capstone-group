@@ -38,9 +38,11 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/reviews/create", "/reviews/*/edit","/profile", "/view-brewery", "/create", "/edit-profile").authenticated()
                         .requestMatchers("/", "/reviews", "/reviews/*", "/sign-up", "/sign-in", "/view-breweries").permitAll()
+
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll())
-                .formLogin((login) -> login.loginPage("/sign-in").defaultSuccessUrl("/profile"))
-                .logout((logout) -> logout.logoutSuccessUrl("/"))
+                .formLogin((login) -> login.loginPage("/sign-in").defaultSuccessUrl("/profile", true))
+                .logout((logout) -> logout.logoutSuccessUrl("/sign-in"))
+
                 .httpBasic(withDefaults());
         return http.build();
     }

@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.awt.*;
 import java.util.List;
@@ -110,6 +111,19 @@ public class UserController {
     public String saveEditedProfile(@ModelAttribute User user) {
         userDao.save(user);
         return "redirect:users/profile";
+    }
+
+    @GetMapping("profile/edit-review")
+    public String showEdit(@RequestParam Long reviewId, Model model){
+        Review existingReview = reviewRepository.findById(reviewId).orElse(null);
+        model.addAttribute("review", existingReview);
+        return "users/profile";
+    }
+
+    @PostMapping("profile/edit-review")
+    public String editReview(@ModelAttribute Review editedReview){
+        reviewRepository.save(editedReview);
+        return "redirect:/view-brewery?brewery=" + editedReview.getBrewery();
     }
 
 }
