@@ -36,23 +36,10 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
-                                .requestMatchers("/reviews/create", "/reviews/*/edit","/profile", "/view-brewery", "/create").authenticated()
+                        .requestMatchers("/reviews/create", "/reviews/*/edit","/profile", "/view-brewery", "/create", "/edit-profile").authenticated()
                         .requestMatchers("/", "/reviews", "/reviews/*", "/sign-up", "/sign-in", "/view-breweries").permitAll()
-                        /* Pages that require authentication
-                         * only authenticated users can create and edit ads */
-//<<<<<<< HEAD
-                        .requestMatchers("/reviews/create", "/reviews/*/edit","/profile", "/edit-profile").authenticated()
-//=======
-//>>>>>>> 4ddebbdcfb8e18bce5ca375744ad1e0efe82063d
-                        /* Pages that do not require authentication
-                         * anyone can visit the home page, register, login, and view ads */
-//                        .requestMatchers("/", "/reviews", "/reviews/*", "/sign-up", "/sign-in", "/view-breweries", "/view-brewery").permitAll()
-                        // allow loading of static resources
-                        .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
-                )
-                /* Login configuration */
+                        .requestMatchers("/css/**", "/js/**", "/img/**").permitAll())
                 .formLogin((login) -> login.loginPage("/sign-in").defaultSuccessUrl("/profile"))
-                /* Logout configuration */
                 .logout((logout) -> logout.logoutSuccessUrl("/"))
                 .httpBasic(withDefaults());
         return http.build();

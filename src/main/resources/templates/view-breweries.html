@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Brewery DB Search</title>
-    <link rel="stylesheet" href="brew.css">
+<header th:replace="partials/head.html :: header"></header>
 <body>
+<nav th:insert="partials/nav-bar.html :: nav-bar2"></nav>
+<nav th:insert="partials/nav-bar.html :: nav-bar"></nav>
 <div class="container">
     <h1>Search Open Brewery DB</h1>
     <input type="text" id="breweryName" placeholder="Brewery Name">
@@ -27,7 +25,6 @@
     <button onclick="searchBreweries()">Search</button>
     <div id="results"></div>
 </div>
-
-<script src="/js/brew.js"></script>
+<script th:src="@{/js/brew.js}"></script>
 </body>
 </html>

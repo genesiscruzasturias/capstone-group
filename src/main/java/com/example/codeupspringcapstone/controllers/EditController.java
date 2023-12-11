@@ -17,17 +17,19 @@ public class EditController {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    @GetMapping
-    public String showEdit(@RequestParam Long reviewId, Model model){
-    Review existingReview = reviewRepository.findById(reviewId).orElse(null);
-    model.addAttribute("review", existingReview);
-    return "users/profile";
-    }
+    //Code for models on profile page, needs to be added to the profile controller
 
-    @PostMapping
-    public String editReview(@ModelAttribute Review editedReview){
-    reviewRepository.save(editedReview);
-    return "redirect:/view-brewery?brewery=" + editedReview.getBrewery();
-    }
+//    @GetMapping()
+//    public String showEdit(@RequestParam Long reviewId, Model model){
+//    Review existingReview = reviewRepository.findById(reviewId).orElse(null);
+//    model.addAttribute("review", existingReview);
+//    return "users/profile";
+//    }
+//
+//    @PostMapping()
+//    public String editReview(@ModelAttribute Review editedReview){
+//    reviewRepository.save(editedReview);
+//    return "redirect:/view-brewery?brewery=" + editedReview.getBrewery();
+//    }
 
 }

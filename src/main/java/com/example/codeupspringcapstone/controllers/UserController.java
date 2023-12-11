@@ -5,6 +5,7 @@ import com.example.codeupspringcapstone.models.User;
 import com.example.codeupspringcapstone.repositories.ReviewRepository;
 import com.example.codeupspringcapstone.repositories.UserRepository;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 // import jakarta.validation.Valid;
@@ -37,6 +38,11 @@ public class UserController {
         this.reviewRepository = reviewRepository;
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @GetMapping("/")
+    public String getAllUsers(Model model) {
+        return "index";
     }
 
     //Despite this beingset up looking the right way, it still isn't connecting well on the nav bar.

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<header th:replace="partials/head.html :: header"></header>
+<nav th:insert="partials/nav-bar.html :: nav-bar3"></nav>
 <body>
     <h1>Sign in to your Account!</h1>
     <div th:if="${param.error}">
