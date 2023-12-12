@@ -123,6 +123,6 @@ public class Review {
 
     public User getUser() { return user; }
 
-    public void setId(String breweryId) {
-    }
+//    public void setId(String breweryId) {
+//    }
 }

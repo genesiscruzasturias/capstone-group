@@ -2,29 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:replace="partials/head.html :: header"></header>
 <body>
-<nav th:insert="partials/nav-bar.html :: nav-bar2"></nav>
-<nav th:insert="partials/nav-bar.html :: nav-bar"></nav>
-<div class="container">
-    <h1>Search Open Brewery DB</h1>
-    <input type="text" id="breweryName" placeholder="Brewery Name">
-    <input type="text" id="city" placeholder="City">
-    <input type="text" id="state" placeholder="State">
-    <select id="breweryType">
-        <option value="">Select Brewery Type</option>
-        <option value="micro">Micro</option>
-        <option value="nano">Nano</option>
-        <option value="regional">Regional</option>
-        <option value="brewpub">Brewpub</option>
-        <option value="large">Large</option>
-        <option value="planning">Planning</option>
-        <option value="bar">Bar</option>
-        <option value="contract">Contract</option>
-        <option value="proprietor">Proprietor</option>
-        <option value="closed">Closed</option>
-    </select>
-    <button onclick="searchBreweries()">Search</button>
-    <div id="results"></div>
-</div>
-<script th:src="@{/js/brew.js}"></script>
+    <nav th:insert="partials/nav-bar.html :: nav-bar2"></nav>
+    <nav th:insert="partials/nav-bar.html :: nav-bar"></nav>
+    <div class="container">
+        <h1>Search Open Brewery DB</h1>
+        <input type="text" id="breweryName" placeholder="Brewery Name">
+        <input type="text" id="city" placeholder="City">
+        <input type="text" id="state" placeholder="State">
+        <select id="breweryType">
+            <option value="">Select Brewery Type</option>
+            <option value="micro">Micro</option>
+            <option value="nano">Nano</option>
+            <option value="regional">Regional</option>
+            <option value="brewpub">Brewpub</option>
+            <option value="large">Large</option>
+            <option value="planning">Planning</option>
+            <option value="bar">Bar</option>
+            <option value="contract">Contract</option>
+            <option value="proprietor">Proprietor</option>
+            <option value="closed">Closed</option>
+        </select>
+        <button onclick="searchBreweries()">Search</button>
+        <div id="results"></div>
+    </div>
+    <script th:src="@{/js/brew.js}"></script>
 </body>
 </html>

@@ -1,64 +1,55 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var modalButtons = document.querySelectorAll('.open-modal-btn');
+let modal;
+document.addEventListener("DOMContentLoaded", function () {
+    modal = document.getElementById("myModal");
+    let openModalBtns = document.querySelectorAll(".open-modal-btn");
+    let span = document.querySelector(".close");
+    let editedDescriptionTextarea = document.getElementById("editedDescription");
+    let reviewIdInput = document.getElementById("reviewId");
 
-    modalButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            var modalId = 'myModal-' + button.getAttribute('data-review-id');
-            var modal = document.getElementById(modalId);
-            modal.style.display = 'block';
+    openModalBtns.forEach(function (openModalBtn) {
+        openModalBtn.addEventListener("click", function () {
+            let reviewId = openModalBtn.getAttribute("data-review-id");
+            let editedDescription = openModalBtn.getAttribute("data-review-description");
+            console.log("Edited Description before setting:", editedDescription);
+
+            editedDescriptionTextarea.value = editedDescription;
+            reviewIdInput.value = reviewId;
+
+            modal.style.display = "block";
         });
     });
 
-    var closeButtons = document.querySelectorAll('.close');
+    span.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
 
-    closeButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            var modal = button.closest('.modal');
-            modal.style.display = 'none';
-        });
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
     });
 });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     var modal = document.getElementById("myModal");
-//     var span = document.getElementsByClassName("close")[0];
-//
-//     document.querySelectorAll(".open-modal-btn").forEach(function (button) {
-//         button.addEventListener("click", function () {
-//             openModal(button);
-//         });
-//     });
-//
-//
-//     span.addEventListener("click", closeModal);
-//     window.addEventListener("click", function (event) {
-//         if (event.target === modal) {
-//             closeModal();
-//         }
-//     });
-//
-//     function openModal(button) {
-//         var reviewId = button.getAttribute("data-review-id");
-//         var reviewBrewery = button.getAttribute("data-review-brewery");
-//         var reviewDescription = button.getAttribute("data-review-description");
-//
-//
-//         document.getElementById("editedBrewery").value = reviewBrewery;
-//         document.getElementById("editedDescription").value = reviewDescription;
-//
-//
-//         modal.style.display = "block";
-//     }
-//
-//     function closeModal() {
-//         modal.style.display = "none";
-//     }
-//
-//     var editPostForm = document.getElementById("editPostForm");
-//     editPostForm.addEventListener("submit", function (event) {
-//         event.preventDefault();
-//
-//         closeModal();
-//     });
-// });
+let editPostForm = document.getElementById("editPostForm");
+editPostForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
+
+    let formData = new FormData(editPostForm);
+
+
+    fetch(editPostForm.action, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+
+                modal.style.display = "none";
+
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
