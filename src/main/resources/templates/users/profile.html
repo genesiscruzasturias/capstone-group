@@ -78,16 +78,17 @@
     <!-- Trigger/Open The Modal -->
     <div th:each="review : ${userReviews}">
     <button id="myBtn" class="open-modal-btn" data-review-id="${review.id}" data-review-brewery="${review.brewery}" data-review-description="${review.description}">Edit Post</button>
+        <button>Delete Post</button>
         <span th:text="${review.description}"></span>
 
 
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <div id="myModal" class="modal" th:id="'myModal-' + ${review.id}">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <form id="editPostForm">
-                <label for="editedBrewery">Brewery Id:</label>
-                <input type="text" id="editedBrewery" name="editedBrewery" required th:value="${reviewBrewery}">
+            <form id="editPostForm" th:action="@{'/profile/edit-review?reviewId=' + ${review.id}}" method="post">
+<!--                <label for="editedBrewery">Brewery Id:</label>-->
+<!--                <input type="text" id="editedBrewery" name="editedBrewery" required th:value="${reviewBrewery}">-->
 
                 <label for="editedDescription">Description:</label>
                 <textarea id="editedDescription" name="editedDescription" required th:text="${reviewDescription}"></textarea>
