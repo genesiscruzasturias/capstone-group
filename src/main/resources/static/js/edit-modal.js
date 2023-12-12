@@ -1,28 +1,43 @@
-// Get the modal
-var modal = document.getElementById("myModal");
+document.addEventListener("DOMContentLoaded", function () {
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+    document.querySelectorAll(".open-modal-btn").forEach(function (button) {
+        button.addEventListener("click", function () {
+            openModal(button);
+        });
+    });
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-span.onclick = function() {
-    modal.style.display = "none";
-}
+    span.addEventListener("click", closeModal);
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
 
-window.onclick = function(event) {
-    if (event.target == modal) {
+    function openModal(button) {
+        var reviewId = button.getAttribute("data-review-id");
+        var reviewBrewery = button.getAttribute("data-review-brewery");
+        var reviewDescription = button.getAttribute("data-review-description");
+
+
+        document.getElementById("editedBrewery").value = reviewBrewery;
+        document.getElementById("editedDescription").value = reviewDescription;
+
+
+        modal.style.display = "block";
+    }
+
+    function closeModal() {
         modal.style.display = "none";
     }
-}
-var editButtonInsideModal = document.getElementById('editButtonInsideModal');
-if (editButtonInsideModal) {
-    editButtonInsideModal.onclick = function() {
-        // Your logic for editing the post goes here
-    };
-}
+
+    var editPostForm = document.getElementById("editPostForm");
+    editPostForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        closeModal();
+    });
+});
+

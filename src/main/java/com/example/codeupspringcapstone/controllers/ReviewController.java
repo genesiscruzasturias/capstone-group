@@ -4,6 +4,7 @@ import com.example.codeupspringcapstone.models.Review;
 import com.example.codeupspringcapstone.models.User;
 import com.example.codeupspringcapstone.repositories.ReviewRepository;
 import com.example.codeupspringcapstone.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class ReviewController {
 
     @PostMapping("/create")
     public String createPost(@ModelAttribute Review review, Model model, @RequestParam String breweryId){
-        User user = userDAO.getUsersById(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Review newReview = new Review();
 //        String breweryId = "random-brewery-id";
         review = reviewDAO.getPostById(1L);
