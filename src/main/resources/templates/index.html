@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
-<header th:replace="partials/head.html :: header"></header>
+<header th:replace="~{partials/head.html :: header}"></header>
 <body>
     <div class="container">
-        <nav th:insert="partials/nav-bar.html :: nav-bar2"></nav>
-        <nav th:insert="partials/nav-bar.html :: nav-bar"></nav>
+        <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
+        <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
 
         <!--upper box for hero-->
         <div class="hero-top">
