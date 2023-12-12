@@ -123,16 +123,16 @@ public class UserController {
         reviewRepository.save(editedReview);
         return "redirect:/view-brewery?brewery=" + editedReview.getBrewery();
     }
-    @Controller
-    @RequestMapping("/profile")
-    public class ProfileController {
-        @Autowired
-        private UserRepository userRepository;
+//    @Controller
+//    @RequestMapping("/profile")
+//    public class ProfileController {
+//        @Autowired
+//        private UserRepository userRepository;
 
         // Edit profile
-        @GetMapping("/edit/{id}")
+        @GetMapping("/profile/edit/{id}")
         public String editProfile(@PathVariable("id") Long id, Model model) {
-            Optional<User> userOptional = userRepository.findById(id);
+            Optional<User> userOptional = userDao.findById(id);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
                 model.addAttribute("user", user);
@@ -142,18 +142,18 @@ public class UserController {
             }
         }
 
-        @PostMapping("/edit")
-        public String saveProfile(@ModelAttribute("user") User user) {
-            userRepository.save(user);
-            return "redirect:/profile";
-        }
+//        @PostMapping("/edit")
+//        public String saveProfile(@ModelAttribute("user") User user) {
+//            userRepository.save(user);
+//            return "redirect:/profile";
+//        }
 
         // Delete profile
-        @GetMapping("/delete/{id}")
+        @GetMapping("/profile/delete/{id}")
         public String deleteProfile(@PathVariable("id") Long id) {
-            userRepository.deleteById(id);
+            userDao.deleteById(id);
             return "redirect:/profile";
         }
-    }
+//    }
 }
 

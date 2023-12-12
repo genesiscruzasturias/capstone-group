@@ -5,22 +5,19 @@
     <div class="container">
         <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
         <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
-
-        <!--upper box for hero-->
         <div class="hero-top">
             <div class="welcome-box">
-                <h1>Welcome to <span>Brew-Hop</span>!</h1>
+                <h1>Welcome to <span class="hero-title">Brew-Hop!</span></h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi porta lorem mollis aliquam ut porttitor leo. Leo vel fringilla est ullamcorper eget nulla facilisi etiam.</p>
+                <li><form th:action="@{/sign-in}" th:method="post">
+                    <button>Join us today!</button>
+                </form></li>
             </div>
             <div class="hero-image">
-                <img src="url">
+                <img src="/img/Untitled design.png" alt="Hero-Image">
             </div>
         </div>
         <div class="hero-bottom">
-            <div class="posts-holder-hero">
-                <h2>User posts</h2>
-                <div class="posts-holder"></div>
-            </div>
             <div class="breweries-holder-hero">
                 <h2>Check out some Breweries!</h2>
                 <div class ="random-brewery-holder"></div>
