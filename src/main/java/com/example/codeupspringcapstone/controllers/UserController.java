@@ -115,13 +115,26 @@ public class UserController {
     public String showEdit(@RequestParam Long reviewId, Model model){
         Review existingReview = reviewRepository.findById(reviewId).orElse(null);
         model.addAttribute("review", existingReview);
+        System.out.println("Review description: " + existingReview.getDescription());
         return "users/profile";
     }
 
-    @PostMapping("profile/edit-review")
-    public String editReview(@ModelAttribute Review editedReview){
-        reviewRepository.save(editedReview);
-        return "redirect:/view-brewery?brewery=" + editedReview.getBrewery();
+//    @PostMapping("profile/edit-review")
+//    public String editReview(@ModelAttribute Review editedReview){
+//        String newDescription = editedReview.getDescription();
+//        reviewRepository.save(editedReview);
+//        return "redirect:/profile";
+//    }
+@PostMapping("/profile/edit-review")
+public String editReview(@RequestParam Long reviewId, @RequestParam String editedDescription) {
+    // Retrieve the existing review from the repository
+    Review existingReview = reviewRepository.findById(reviewId).orElse(null);
+
+    // Update the description if the review exists
+    if (existingReview != null) {
+        existingReview.setDescription(editedDescription);
+        reviewRepository.save(existingReview);
+        return "redirect:/profile";
     }
 //    @Controller
 //    @RequestMapping("/profile")
@@ -141,6 +154,16 @@ public class UserController {
                 return "error";
             }
         }
+    // Redirect to the profile page after editing
+    return "redirect:/profile";
+}
+   
+  @DeleteMapping("/profile/delete-review/{id}")
+    public String deleteReview(@PathVariable long id) {
+        System.out.println("Does this run?");
+        reviewRepository.deleteById(id);
+        return "redirect:/index";
+    }
 
 //        @PostMapping("/edit")
 //        public String saveProfile(@ModelAttribute("user") User user) {
