@@ -15,13 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -125,6 +123,37 @@ public class UserController {
         reviewRepository.save(editedReview);
         return "redirect:/view-brewery?brewery=" + editedReview.getBrewery();
     }
+    @Controller
+    @RequestMapping("/profile")
+    public class ProfileController {
+        @Autowired
+        private UserRepository userRepository;
 
+        // Edit profile
+        @GetMapping("/edit/{id}")
+        public String editProfile(@PathVariable("id") Long id, Model model) {
+            Optional<User> userOptional = userRepository.findById(id);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                model.addAttribute("user", user);
+                return "edit_profile";
+            } else {
+                return "error";
+            }
+        }
+
+        @PostMapping("/edit")
+        public String saveProfile(@ModelAttribute("user") User user) {
+            userRepository.save(user);
+            return "redirect:/profile";
+        }
+
+        // Delete profile
+        @GetMapping("/delete/{id}")
+        public String deleteProfile(@PathVariable("id") Long id) {
+            userRepository.deleteById(id);
+            return "redirect:/profile";
+        }
+    }
 }
 
