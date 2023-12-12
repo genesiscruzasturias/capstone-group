@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ReviewController {
@@ -21,12 +22,7 @@ public class ReviewController {
         this.userDAO = userDAO;
     }
 
-    @GetMapping("/reviews")
-    public String homePage(Model model) {
-        ArrayList<Review> allPosts = new ArrayList<>(reviewDAO.findAll());
-        model.addAttribute("allPosts", allPosts);
-        return "index";
-    }
+
 
     @GetMapping("/create")
     public String setPostModel(Model model) {
