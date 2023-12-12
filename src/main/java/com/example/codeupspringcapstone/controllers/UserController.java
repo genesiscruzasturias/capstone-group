@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -135,15 +136,47 @@ public String editReview(@RequestParam Long reviewId, @RequestParam String edite
         reviewRepository.save(existingReview);
         return "redirect:/profile";
     }
+//    @Controller
+//    @RequestMapping("/profile")
+//    public class ProfileController {
+//        @Autowired
+//        private UserRepository userRepository;
 
+        // Edit profile
+        @GetMapping("/profile/edit/{id}")
+        public String editProfile(@PathVariable("id") Long id, Model model) {
+            Optional<User> userOptional = userDao.findById(id);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                model.addAttribute("user", user);
+                return "edit_profile";
+            } else {
+                return "error";
+            }
+        }
     // Redirect to the profile page after editing
     return "redirect:/profile";
 }
-    @DeleteMapping("/profile/delete-review/{id}")
+   
+  @DeleteMapping("/profile/delete-review/{id}")
     public String deleteReview(@PathVariable long id) {
         System.out.println("Does this run?");
         reviewRepository.deleteById(id);
         return "redirect:/index";
     }
+
+//        @PostMapping("/edit")
+//        public String saveProfile(@ModelAttribute("user") User user) {
+//            userRepository.save(user);
+//            return "redirect:/profile";
+//        }
+
+        // Delete profile
+        @GetMapping("/profile/delete/{id}")
+        public String deleteProfile(@PathVariable("id") Long id) {
+            userDao.deleteById(id);
+            return "redirect:/profile";
+        }
+//    }
 }
 
