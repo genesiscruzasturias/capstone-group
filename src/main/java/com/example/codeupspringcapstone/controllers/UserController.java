@@ -41,6 +41,11 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @GetMapping("/")
+    public String getAllUsers(Model model) {
+        return "index";
+    }
+
     //Despite this beingset up looking the right way, it still isn't connecting well on the nav bar.
     @GetMapping("/sign-up")
     public String showSignupForm(Model model) {

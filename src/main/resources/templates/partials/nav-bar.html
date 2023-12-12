@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
 <body>
 <div th:fragment="nav-bar" th:unless="${#authorization.expression('isAuthenticated()')}" class="nav-bar">
+    <span class="logo">Brew-Hop</span>
   <ul>
-      <span class="nav-brew-hop">Brew-Hop</span>
       <a th:href="@{/}" th:method="get">Home</a>
       <a th:href="@{/view-breweries}" th:method="get">Search Breweries</a>
       <a th:href="@{/sign-up}" th:method="get">Sign up</a>
@@ -12,8 +12,8 @@
 </div>
 
 <div th:fragment="nav-bar2" th:if="${#authorization.expression('isAuthenticated()')}" class="nav-bar">
+    <span class="logo">Brew-Hop</span>
   <ul>
-      <span class="nav-brew-hop">Brew-Hop</span>
       <a th:href="@{/}" th:method="post">Home</a>
       <a th:href="@{/view-breweries}" th:method="post">Search</a>
       <a th:href="@{/profile}" th:method="get">Profile</a>
@@ -21,6 +21,13 @@
         <button class="btn-link btn" style="margin-top: 8px">Logout</button>
       </form>
   </ul>
+</div>
+
+<div th:fragment="nav-bar3">
+    <span class="nav-brew-hop">Brew-Hop</span>
+    <ul>
+        <li><a th:href="@{/}" th:method="post">Home</a></li>
+    </ul>
 </div>
 </body>
 </html>
