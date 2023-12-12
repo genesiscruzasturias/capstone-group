@@ -30,7 +30,6 @@
                         Phone: ${formattedPhone}
 
                     </p>`;
-                document.getElementById("create-review").submit();
                 console.log(breweryID);
             })
             .catch(error => console.error('Error:', error));

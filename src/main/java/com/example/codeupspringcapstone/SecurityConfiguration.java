@@ -37,7 +37,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/reviews/create", "/reviews/*/edit","/profile", "/view-brewery", "/create", "/edit-profile").authenticated()
-                        .requestMatchers("/", "/reviews", "/reviews/*", "/sign-up", "/sign-in", "/view-breweries").permitAll()
+                        .requestMatchers("/", "/reviews", "/reviews/*", "/sign-up", "/sign-in", "/view-breweries", "/view-brewery").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll())
                 .formLogin((login) -> login.loginPage("/sign-in").defaultSuccessUrl("/profile", true))
                 .logout((logout) -> logout.logoutSuccessUrl("/sign-in"))
