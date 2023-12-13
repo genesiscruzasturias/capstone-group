@@ -14,11 +14,11 @@ import java.util.List;
 @Controller
 public class ReviewController {
 
-    private final ReviewRepository reviewDAO;
+    private final ReviewRepository reviewRepository;
     private final UserRepository userDAO;
 
-    public ReviewController(ReviewRepository reviewDAO, UserRepository userDAO) {
-        this.reviewDAO = reviewDAO;
+    public ReviewController(ReviewRepository reviewRepository, UserRepository userDAO) {
+        this.reviewRepository = reviewRepository;
         this.userDAO = userDAO;
     }
 
@@ -38,13 +38,13 @@ public class ReviewController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Review newReview = new Review();
 //        String breweryId = "random-brewery-id";
-        review = reviewDAO.getPostById(1L);
+        review = reviewRepository.getPostById(1L);
         newReview.setBrewery(breweryId);
         newReview.setUser(user);
         newReview.setDescription(review.getDescription());
         newReview.setImage("image.jpg");
         newReview.setRating(10);
-        reviewDAO.save(newReview);
+        reviewRepository.save(newReview);
 //        model.addAttribute("brewery", brewery);
         model.addAttribute("review", newReview);
 //        model.
@@ -54,7 +54,7 @@ public class ReviewController {
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
     public String individualPost(@PathVariable long id, Model model) {
-        Review singlePost = reviewDAO.getPostById(id);
+        Review singlePost = reviewRepository.getPostById(id);
         model.addAttribute("singlePost", singlePost);
         return "view-brewery";
     }
