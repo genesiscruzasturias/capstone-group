@@ -37,11 +37,9 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
 
-<<<<<<< HEAD
-                        .requestMatchers("/reviews/create", "/reviews/*/edit","/profile", "/create", "/profile/edit/{id}", "/profile/edit", "/delete-profile","/delete-profile/{id}").authenticated()
-=======
+
                         .requestMatchers("/reviews/create", "/review/edit","/profile", "/create", "/profile/edit/{id}", "/profile/edit", "/profile/edit-review", "/view-review/{id}").authenticated()
->>>>>>> b22175e (on main accidentally)
+
                         .requestMatchers("/", "/reviews", "/reviews/*", "/sign-up", "/sign-in", "/view-breweries", "/view-brewery").permitAll()
 
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll())
