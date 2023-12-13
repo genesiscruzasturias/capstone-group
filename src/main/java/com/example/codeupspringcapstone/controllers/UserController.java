@@ -80,23 +80,26 @@ public class UserController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", loggedInUser);
         Long userId = loggedInUser.getId();
-        List <Review> userReview = reviewRepository.findByUserId(userId);
+        List<Review> userReview = reviewRepository.findByUserId(userId);
 
         model.addAttribute("userReviews", userReview);
         return "users/profile";
     }
 
-@GetMapping("/profile/edit/{id}")
+    @GetMapping("/profile/edit/{id}")
     public String editProfile(@PathVariable Long id, Model model) {
-    // Find the user by ID
-    Optional<User> userOptional = userDao.findById(id);
-    if (userOptional.isPresent()) {
-        model.addAttribute("user", userOptional.get());
+        User user = userDao.getUsersById(id);
+        model.addAttribute("user", user);
         return "users/edit-profile"; // Corrected the return path
-    } else {
-        return "redirect:/"; // Redirect to home or an error page if user not found
     }
-}
+
+    @PostMapping("/profile/edit")
+    public String updateProfile(@ModelAttribute User user) {
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
+        userDao.save(user);
+        return "redirect:/profile";
+    }
 
     @PostMapping("/profile/delete")
     public String deleteProfile() {
@@ -105,13 +108,16 @@ public class UserController {
         return "redirect:/login";
     }
 
-        // Delete profile
-        @GetMapping("/profile/delete/{id}")
-        public String deleteProfile(@PathVariable("id") Long id) {
-            userDao.deleteById(id);
-            return "redirect:/profile";
-        }
-
+    // Delete profile
+    @GetMapping("/profile/delete/{id}")
+    public String deleteProfile(@PathVariable("id") Long id) {
+        userDao.deleteById(id);
+        return "redirect:/profile";
+    }
 }
+
+    //}
+//with Gonzo help
+
 
 

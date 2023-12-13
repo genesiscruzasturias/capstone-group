@@ -7,6 +7,8 @@
 <body>
 <h1>Edit Profile</h1>
 <form th:action="@{/profile/edit}" th:object="${user}" th:method="post">
+
+    <input type="hidden" th:field="*{id}"/>
     <div>
         <label for="username">Username:</label>
         <input type="text" id="username" th:field="*{username}"/>
