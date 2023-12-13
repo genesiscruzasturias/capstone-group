@@ -11,7 +11,6 @@
     --tertiary-color: #A47F6A;
     --quaternary-color: #9AA1B1;
     --new-color: #CDB5A7;
-    --new-color2: #3a3434;
 }
 
 ul, li, h1, h2, h3, h4, h5, h6, p{
@@ -35,62 +34,44 @@ a {
 }
 
 /*Nav Bar Styling and Animations*/
+nav, nav * {
+    transition: 500ms;
+}
+
 nav {
-    display: flex;
-    background-color: var(--new-color2);
-    width: 100%
-}
-li {
-    list-style: none;
+    background-color: var(--primary-color);
+    padding: 1rem;
+
+    position: sticky;
+    top: 0;
 }
 
-nav ul {
-    float: right;
-}
-
-nav li {
-    display: inline-block;
-}
-
-nav li {
-    display: inline-block;
-}
-
-/* Add some margin to the logout button for spacing */
-nav form {
-    margin-right: 20px;
-}
-
-nav a {
-    display: inline-block;
+nav.a {
     color: var(--secondary-color);
-    text-decoration: none;
-    padding: 25px;
 }
 
-nav a:hover {
-    text-decoration: ;
-    transition: 0.3s;
+.inner-nav {
+    display: flex;
+    justify-content: space-between;
 }
 
-nav button {
-    background-color: var(--quaternary-color);
-    border-width: 0;
-    border-radius: 20px;
-    width: 100px;
-    height: 40px;
-    align-self: baseline;
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    gap: clamp(0.5rem, 5vw, 2rem);
 }
 
 .logo {
     font-family: 'Playfair Display SC', serif;
-    float: left;
     color: #fff;
     font-size: 50px;
-    line-height: 50px;
     font-weight: 900;
-    padding-left: 20px;
 }
+
+/*Index.html styling*/
 body {
     background-color: var(--secondary-color);
 }
@@ -121,6 +102,7 @@ body {
     width: 350px;
     height: 40px;
     align-self: baseline;
+    row-gap: 50px;
 }
 .welcome-box h1 {
     font-size: 50px;
@@ -136,4 +118,11 @@ body {
 }
 .hero-bottom {
     background-color: pink;
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    Width: auto;
+    height: 250px;
 }
