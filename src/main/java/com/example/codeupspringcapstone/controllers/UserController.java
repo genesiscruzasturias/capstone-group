@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 // import jakarta.validation.Valid;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
+import java.nio.file.attribute.UserPrincipal;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,7 +80,8 @@ public class UserController {
     @GetMapping("/profile")
     public String profilePage(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user", loggedInUser);
+        User user = userDao.getUsersById(loggedInUser.getId());
+        model.addAttribute("user", user);
         Long userId = loggedInUser.getId();
         List<Review> userReview = reviewRepository.findByUserId(userId);
 
@@ -93,31 +96,24 @@ public class UserController {
         return "users/edit-profile"; // Corrected the return path
     }
 
+    //this one works
     @PostMapping("/profile/edit")
     public String updateProfile(@ModelAttribute User user) {
+        System.out.println(user.getPassword());
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
         userDao.save(user);
         return "redirect:/profile";
     }
 
-    @PostMapping("/profile/delete")
+
+    @PostMapping("/delete-profile")
     public String deleteProfile() {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userDao.deleteById(loggedInUser.getId());
-        return "redirect:/login";
-    }
-
-    // Delete profile
-    @GetMapping("/profile/delete/{id}")
-    public String deleteProfile(@PathVariable("id") Long id) {
-        userDao.deleteById(id);
-        return "redirect:/profile";
+        return "redirect:/sign-in";
     }
 }
-
-    //}
-//with Gonzo help
 
 
 
