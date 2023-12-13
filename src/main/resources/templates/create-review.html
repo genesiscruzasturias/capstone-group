@@ -9,7 +9,7 @@
     <div id="breweryInfo"></div>
 
         <form id="create-review" th:action="@{/view-brewery}" th:method="post" th:object="${review}">
-            <input type="hidden"  id="brewFormID" name="breweryId" th:value="${breweryId}">
+            <input type="hidden"  id="brewFormID" name="breweryId">
         <input id="description" th:type="text" th:field="*{description}">
 <!--            <label for="description">Description:</label>-->
 <!--            <input type="text" th:field="*{description}">-->
@@ -20,6 +20,7 @@
     <!--        Body: <input type="text" th:field="*{body}" id="body">-->
 <!--            Add submit button and add event listener-->
         <input type="submit" id="submit-button">
+<!--            <button id="submitReviewBtn"></button>-->
     </form >
 
 
@@ -31,7 +32,7 @@
 <!--        <br>-->
 <!--        <input type="submit">-->
 <!--    </form>-->
-    <script src="static/js/brewery_info.js"></script>
+    <script src="/js/createReviewAndBrewery.js"></script>
 
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.example.codeupspringcapstone.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -25,10 +27,12 @@ public class User {
 
     @Column(name = "password", nullable = false)
     @NotBlank(message = "Password is required")
+    @JsonIgnore
     private String password;
 
     // CREATING RELATIONSHIPS
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<Review> reviews;
 
     // CREATING CONSTRUCTORS

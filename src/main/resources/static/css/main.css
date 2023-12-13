@@ -1,4 +1,128 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Trirong:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/*TODO:Font Family Copy Pastes*/
+/*font-family: 'Playfair Display SC', serif;*/
+/*font-family: 'Trirong', serif;*/
+
+:root{
+    --primary-color: #0C0A09;
+    --secondary-color: #FDF5F2;
+    --tertiary-color: #A47F6A;
+    --quaternary-color: #9AA1B1;
+    --new-color: #CDB5A7;
+}
+
+ul, li, h1, h2, h3, h4, h5, h6, p{
+    font-family: 'Trirong', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    font-family: 'Playfair Display SC', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-style: italic;
+    margin: 0;
+    padding: 0;
+
+}
+
+/*Nav Bar Styling and Animations*/
+nav, nav * {
+    transition: 500ms;
+}
+
 nav {
+    background-color: var(--primary-color);
+    padding: 1rem;
+
+    position: sticky;
+    top: 0;
+}
+
+nav.a {
+    color: var(--secondary-color);
+}
+
+.inner-nav {
     display: flex;
-    background-color: #CDB5A7;
+    justify-content: space-between;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    gap: clamp(0.5rem, 5vw, 2rem);
+}
+
+.logo {
+    font-family: 'Playfair Display SC', serif;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 900;
+}
+
+/*Index.html styling*/
+body {
+    background-color: var(--secondary-color);
+}
+.hero-top {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.welcome-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: #f0dcd5;
+    width: 700px;
+    height: 500px;
+    border: 0;
+    border-radius: 25px;
+    overflow: hidden;
+    text-space: 10px;
+}
+
+.welcome-box button {
+    background-color: var(--quaternary-color);
+    border-width: 0;
+    border-radius: 20px;
+    width: 350px;
+    height: 40px;
+    align-self: baseline;
+    row-gap: 50px;
+}
+.welcome-box h1 {
+    font-size: 50px;
+}
+.hero-title {
+    font-size: 55px;
+    color: var(--secondary-color);
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 900;
+}
+.hero-image {
+    background-color: lightgoldenrodyellow;
+}
+.hero-bottom {
+    background-color: pink;
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    Width: auto;
+    height: 250px;
 }

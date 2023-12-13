@@ -1,5 +1,6 @@
 package com.example.codeupspringcapstone.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class Review {
     private String brewery;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "user_id")
     private User user;
 
@@ -121,6 +123,6 @@ public class Review {
 
     public User getUser() { return user; }
 
-    public void setId(String breweryId) {
-    }
+//    public void setId(String breweryId) {
+//    }
 }
