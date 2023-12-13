@@ -2,37 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/create-review.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Title</title>
 </head>
 <body>
     <h1>Create a post!</h1>
     <div id="breweryInfo"></div>
 
-        <form id="create-review" th:action="@{/view-brewery}" th:method="post" th:object="${review}">
-            <input type="hidden"  id="brewFormID" name="breweryId">
+    <form id="create-review" th:action="@{/view-brewery}" th:method="post" th:object="${review}">
+        <input type="hidden"  id="brewFormID" name="breweryId">
+        <div class="rate">
+            <input type="radio" id="star5" name="rate" value="5" th:field="*{rating}" />
+            <label for="star5" title="text">5 stars</label>
+            <input type="radio" id="star4" name="rate" value="4" th:field="*{rating}" />
+            <label for="star4" title="text">4 stars</label>
+            <input type="radio" id="star3" name="rate" value="3" th:field="*{rating}" />
+            <label for="star3" title="text">3 stars</label>
+            <input type="radio" id="star2" name="rate" value="2" th:field="*{rating}" />
+            <label for="star2" title="text">2 stars</label>
+            <input type="radio" id="star1" name="rate" value="1" th:field="*{rating}" />
+            <label for="star1" title="text">1 star</label>
+        </div>
         <input id="description" th:type="text" th:field="*{description}">
-<!--            <label for="description">Description:</label>-->
-<!--            <input type="text" th:field="*{description}">-->
-<!--            <input type="text" th:field="*{description}">-->
-    <!--    Username: <span th:text="${#authentication.principal.username}"/>-->
-
-<!--            Description: <input type="text" th:field="*{description}">-->
-    <!--        Body: <input type="text" th:field="*{body}" id="body">-->
-<!--            Add submit button and add event listener-->
+        <button id="uploadImageBtn">Upload Images</button>
+        <input th:hidden="true" id="imgURL" th:field="*{image}">
         <input type="submit" id="submit-button">
-<!--            <button id="submitReviewBtn"></button>-->
     </form >
 
-
-
-<!--    <form method="post" action="">-->
-<!--        <span>Private</span><input name="newsletter_signup" value="true" type="checkbox" checked>-->
-<!--        <label for="description">description</label>-->
-<!--        <input id="description" name="description" type="text">-->
-<!--        <br>-->
-<!--        <input type="submit">-->
-<!--    </form>-->
-    <script src="/js/createReviewAndBrewery.js"></script>
-
+    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+    <script type="module" src="/js/createReviewAndBrewery.js"></script>
 </body>
 </html>

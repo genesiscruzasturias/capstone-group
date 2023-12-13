@@ -1,3 +1,7 @@
+    import {
+    client
+    } from "./keys.js"
+
     const defaultId = "default_id";
     const urlParams = new URLSearchParams(window.location.search);
     const breweryID = urlParams.get('brewery') || defaultId;
