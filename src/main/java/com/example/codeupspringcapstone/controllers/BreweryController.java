@@ -53,8 +53,8 @@ public class BreweryController {
         review.setBrewery(breweryId);
         review.setUser(user);
         review.setDescription(review.getDescription());
-        review.setImage("image.jpg");
-        review.setRating(10);
+        review.setImage(review.getImage());
+        review.setRating(review.getRating());
         reviewDAO.save(review);
 
         model.addAttribute("breweryId", breweryId);
