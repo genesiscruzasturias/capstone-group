@@ -7,6 +7,8 @@
 <body>
 <h1>Edit Profile</h1>
 <form th:action="@{/profile/edit}" th:object="${user}" th:method="post">
+
+    <input type="hidden" th:field="*{id}"/>
     <div>
         <label for="username">Username:</label>
         <input type="text" id="username" th:field="*{username}"/>
@@ -18,12 +20,13 @@
     </div>
     <div>
         <label for="password">Password:
-        <input type="text" id="password" th:field="*{password}"/>
+        <input type="text" id="password" name="password"/>
         </label>
     </div>
     <button type="submit">Update Profile</button>
 </form>
     <form th:action="@{/delete-profile}" method="post">
+        <input type="hidden" th:field="*{id}"/>
         <input type="hidden" name="confirmation" value="confirm"/>
         <button type="submit" onclick="return confirm('Are you sure you want to delete your profile?')">Delete Profile
         </button>
