@@ -1,4 +1,5 @@
 let modal;
+
 document.addEventListener("DOMContentLoaded", function () {
     modal = document.getElementById("myModal");
     let openModalBtns = document.querySelectorAll(".open-modal-btn");
@@ -34,20 +35,26 @@ let editPostForm = document.getElementById("editPostForm");
 editPostForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-
     let formData = new FormData(editPostForm);
-
 
     fetch(editPostForm.action, {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRF-TOKEN': formData.get('${_csrf.parameterName}')
+        },
     })
         .then(response => {
-            if (response.ok) {
-
-                modal.style.display = "none";
-
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data:', data);
+            // Optionally, you might want to reload the page or update the UI
+            modal.style.display = "none";
         })
         .catch(error => {
             console.error('Error:', error);

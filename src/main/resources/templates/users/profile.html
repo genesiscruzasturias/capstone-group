@@ -67,7 +67,7 @@
                 <th:block th:each="review : ${userReviews}">
                     <li>
                         <span th:text="${review?.description}"></span>
-                        <button class="open-modal-btn" data-review-id="${review?.id}" data-review-description="${review?.description}">Edit</button>
+                        <button  class="open-modal-btn" data-review-id="${review?.id}" th:attr="data-review-description=${review?.description}">Edit</button>
                         <button class="delete-modal-btn" data-review-id="${review?.id}" data-review-description="${review?.description}">Delete</button>
                     </li>
                 </th:block>
