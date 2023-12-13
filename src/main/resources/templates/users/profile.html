@@ -57,7 +57,8 @@
                    <h1><span th:text="${user.username}"></span></h1>
                     <p th:text="${user.email}"></p>
                     <p th:text="${user.password}"></p>
-                    <button><a th:href="@{/profile/edit}">Edit Profile</a></button>
+                    <button><a th:href="@{/profile/edit/{id}(id = ${ user.getId()})}">Edit Profile</a></button>
+
                 </div>
             </div>
         </div>
