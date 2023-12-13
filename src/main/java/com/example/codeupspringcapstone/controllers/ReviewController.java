@@ -59,4 +59,25 @@ public class ReviewController {
         return "view-brewery";
     }
 
+    @PostMapping("/profile/edit-review")
+    public String editReview(@RequestParam Long reviewId, @RequestParam String editedDescription) {
+        // Retrieve the existing review from the repository
+        Review existingReview = reviewRepository.findById(reviewId).orElse(null);
+
+        // Update the description if the review exists
+        if (existingReview != null) {
+            existingReview.setDescription(editedDescription);
+            reviewRepository.save(existingReview);
+            return "redirect:/profile";
+        }
+        return "redirect:/error";
+    }
+
+    @DeleteMapping("/profile/delete-review/{id}")
+    public String deleteReview(@PathVariable long id) {
+        System.out.println("Does this run?");
+        reviewRepository.deleteById(id);
+        return "redirect:/index";
+    }
+
 }
