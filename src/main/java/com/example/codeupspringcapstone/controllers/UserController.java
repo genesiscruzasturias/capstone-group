@@ -118,13 +118,6 @@ public class UserController {
         System.out.println("Review description: " + existingReview.getDescription());
         return "users/profile";
     }
-
-//    @PostMapping("profile/edit-review")
-//    public String editReview(@ModelAttribute Review editedReview){
-//        String newDescription = editedReview.getDescription();
-//        reviewRepository.save(editedReview);
-//        return "redirect:/profile";
-//    }
 @PostMapping("/profile/edit-review")
 public String editReview(@RequestParam Long reviewId, @RequestParam String editedDescription) {
     // Retrieve the existing review from the repository
@@ -136,28 +129,24 @@ public String editReview(@RequestParam Long reviewId, @RequestParam String edite
         reviewRepository.save(existingReview);
         return "redirect:/profile";
     }
-//    @Controller
-//    @RequestMapping("/profile")
-//    public class ProfileController {
-//        @Autowired
-//        private UserRepository userRepository;
+    return "redirect:/error";
+}
 
         // Edit profile
-        @GetMapping("/profile/edit/{id}")
-        public String editProfile(@PathVariable("id") Long id, Model model) {
-            Optional<User> userOptional = userDao.findById(id);
-            if (userOptional.isPresent()) {
-                User user = userOptional.get();
-                model.addAttribute("user", user);
-                return "edit_profile";
-            } else {
-                return "error";
-            }
-        }
-    // Redirect to the profile page after editing
-    return "redirect:/profile";
-}
-   
+//        @GetMapping("/profile/edit/{id}")
+//        public String editProfile(@PathVariable("id") Long id, Model model) {
+//            Optional<User> userOptional = userDao.findById(id);
+//            if (userOptional.isPresent()) {
+//                User user = userOptional.get();
+//                model.addAttribute("user", user);
+//                return "edit_profile";
+//            } else {
+//                return "error";
+//            }
+//    // Redirect to the profile page after editing
+//    return "redirect:/profile";
+//}
+
   @DeleteMapping("/profile/delete-review/{id}")
     public String deleteReview(@PathVariable long id) {
         System.out.println("Does this run?");
