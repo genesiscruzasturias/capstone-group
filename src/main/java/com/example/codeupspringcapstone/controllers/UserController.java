@@ -99,18 +99,70 @@ public class UserController {
 //    }
 
 
-    @GetMapping("/profile/edit")
-    public String editProfile(Model model) {
-        model.addAttribute("user", new User());
-        return "users/edit-profile";
+//    @GetMapping("/profile/edit/{id}")
+//    public String editProfile(Model model) {
+//        model.addAttribute("user", new User());
+//        return "users/edit-profile/}{id}";
+//    }
+//
+//    @PostMapping("/profile/edit")
+//public String updateProfile(@ModelAttribute @Valid User updatedUser, BindingResult result, Model model, @RequestParam Long id) {
+//        long loggedInUserId = id;
+//
+//if (result.hasErrors()) {
+//model.addAttribute("errors", result.getAllErrors());
+//model.addAttribute("user", updatedUser);
+//System.out.println("User password is: " + updatedUser.getPassword());
+//return "redirect:/profile/edit"; // Return to the edit-profile page if errors occur
+//}
+//updatedUser =new User(loggedInUserId, updatedUser.getUsername(), updatedUser.getEmail(), updatedUser.getPassword());
+//userDao.save(updatedUser);
+//return "redirect:/profile";
+//}
+@GetMapping("/profile/edit/{id}")
+    public String editProfile(@PathVariable Long id, Model model) {
+        // Find the user by ID
+        Optional<User> userOptional = userDao.findById(id);
+        if (userOptional.isPresent()) {
+            model.addAttribute("user", userOptional.get());
+            return "users/edit-profile"; // Corrected the return path
+        } else {
+            return "redirect:/"; // Redirect to home or an error page if user not found
+        }
     }
 
-    @PostMapping("/profile/edit")
-    public String saveEditedProfile(@ModelAttribute User user) {
-        userDao.save(user);
-        return "redirect:users/profile";
-    }
+    @PostMapping("/profile/edit/{id}")
+    public String updateProfile(@PathVariable Long id, @ModelAttribute @Valid User updatedUser, BindingResult result, Model model) {
+        // Find the existing user
+        Optional<User> existingUserOptional = userDao.findById(id);
+        if (!existingUserOptional.isPresent()) {
+            return "redirect:/"; // Redirect if user not found
+        }
+        User existingUser = existingUserOptional.get();
 
+        if (result.hasErrors()) {
+            model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("user", updatedUser);
+            return "users/edit-profile";
+        }
+
+        // Update the user's details
+        existingUser.setUsername(updatedUser.getUsername());
+        existingUser.setEmail(updatedUser.getEmail());
+        if (!updatedUser.getPassword().isEmpty()) {
+            String hashedPassword = passwordEncoder.encode(updatedUser.getPassword());
+            existingUser.setPassword(hashedPassword);
+        }
+        userDao.save(existingUser);
+        return "redirect:/profile";
+    }
+    @PostMapping("/profile/delete")
+    public String deleteProfile() {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userDao.deleteById(loggedInUser.getId());
+        return "redirect:/login";
+    }
+//}
     @GetMapping("profile/edit-review")
     public String showEdit(@RequestParam Long reviewId, Model model){
         Review existingReview = reviewRepository.findById(reviewId).orElse(null);
@@ -123,37 +175,38 @@ public class UserController {
         reviewRepository.save(editedReview);
         return "redirect:/view-brewery?brewery=" + editedReview.getBrewery();
     }
-    @Controller
-    @RequestMapping("/profile")
-    public class ProfileController {
-        @Autowired
-        private UserRepository userRepository;
+}
+//    @Controller
+//    @RequestMapping("/profile")
+//    public class ProfileController {
+//        @Autowired
+//        private UserRepository userRepository;
 
         // Edit profile
-        @GetMapping("/edit/{id}")
-        public String editProfile(@PathVariable("id") Long id, Model model) {
-            Optional<User> userOptional = userRepository.findById(id);
-            if (userOptional.isPresent()) {
-                User user = userOptional.get();
-                model.addAttribute("user", user);
-                return "edit_profile";
-            } else {
-                return "error";
-            }
-        }
+//        @GetMapping("/edit/{id}")
+//        public String editProfile(@PathVariable("id") Long id, Model model) {
+//            Optional<User> userOptional = userRepository.findById(id);
+//            if (userOptional.isPresent()) {
+//                User user = userOptional.get();
+//                model.addAttribute("user", user);
+//                return "edit_profile";
+//            } else {
+//                return "error";
+//            }
+//        }
 
-        @PostMapping("/edit")
-        public String saveProfile(@ModelAttribute("user") User user) {
-            userRepository.save(user);
-            return "redirect:/profile";
-        }
+//        @PostMapping("/edit")
+//        public String saveProfile(@ModelAttribute("user") User user) {
+//            userRepository.save(user);
+//            return "redirect:/profile";
+//        }
+    // method to delete user profile
+//          @PostMapping("/delete-profile")
+//public String deleteProfile() {
+//User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//userDao.deleteById(loggedInUser.getId());
+//return "redirect:/login";
+//}
+//}
 
-        // Delete profile
-        @GetMapping("/delete/{id}")
-        public String deleteProfile(@PathVariable("id") Long id) {
-            userRepository.deleteById(id);
-            return "redirect:/profile";
-        }
-    }
-}
 
