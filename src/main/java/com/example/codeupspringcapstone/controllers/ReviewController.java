@@ -4,12 +4,13 @@ import com.example.codeupspringcapstone.models.Review;
 import com.example.codeupspringcapstone.models.User;
 import com.example.codeupspringcapstone.repositories.ReviewRepository;
 import com.example.codeupspringcapstone.repositories.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Optional;
 
 @Controller
 public class ReviewController {
@@ -59,25 +60,35 @@ public class ReviewController {
         return "view-brewery";
     }
 
-    @PostMapping("/profile/edit-review")
-    public String editReview(@RequestParam Long reviewId, @RequestParam String editedDescription) {
-        // Retrieve the existing review from the repository
-        Review existingReview = reviewRepository.findById(reviewId).orElse(null);
+    @GetMapping("/view-review/{id}")
+    public String viewEditPostForm(@PathVariable long id, Model model) {
+        Review currentReview = reviewRepository.getPostById(id);
+//        Optional<Review> reviewOptional = Optional.ofNullable(reviewRepository.findById(id));
+        model.addAttribute("review", currentReview);
+        return "view-review";
+    }
 
-        // Update the description if the review exists
-        if (existingReview != null) {
-            existingReview.setDescription(editedDescription);
-            reviewRepository.save(existingReview);
-            return "redirect:/profile";
-        }
-        return "redirect:/error";
+
+    @PostMapping("/review/edit")
+    public String updatePost(@ModelAttribute Review review) {
+
+        reviewRepository.save(review);
+//        review.setDescription(description);
+//        review.setRating(10);
+//        reviewRepository.save(review);
+        return "redirect:/profile";
     }
 
     @DeleteMapping("/profile/delete-review/{id}")
-    public String deleteReview(@PathVariable long id) {
-        System.out.println("Does this run?");
-        reviewRepository.deleteById(id);
-        return "redirect:/index";
+    public ResponseEntity<String> deleteReview (@PathVariable long id) {
+        try {
+            // Assuming reviewRepository is an instance of ReviewRepository
+            reviewRepository.deleteById(id);
+            return ResponseEntity.ok("Review deleted successfully");
+        } catch (Exception e) {
+            e.printStackTrace();  // Log the exception for debugging purposes
+            return ResponseEntity.status(500).body("Error deleting review");
+        }
     }
 
 }
