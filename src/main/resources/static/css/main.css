@@ -34,10 +34,6 @@ a {
 }
 
 /*Nav Bar Styling and Animations*/
-nav, nav * {
-    transition: 500ms;
-}
-
 nav {
     background-color: var(--primary-color);
     padding: 1rem;
@@ -93,36 +89,4 @@ body {
     border-radius: 25px;
     overflow: hidden;
     text-space: 10px;
-}
-
-.welcome-box button {
-    background-color: var(--quaternary-color);
-    border-width: 0;
-    border-radius: 20px;
-    width: 350px;
-    height: 40px;
-    align-self: baseline;
-    row-gap: 50px;
-}
-.welcome-box h1 {
-    font-size: 50px;
-}
-.hero-title {
-    font-size: 55px;
-    color: var(--secondary-color);
-    font-family: 'Playfair Display SC', serif;
-    font-weight: 900;
-}
-.hero-image {
-    background-color: lightgoldenrodyellow;
-}
-.hero-bottom {
-    background-color: pink;
-}
-
-.footer {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    Width: auto;
-    height: 250px;
 }

@@ -3,7 +3,7 @@
 <!--Thymeleaf connection-->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
 <body>
-<div th:fragment="nav-bar" th:unless="${#authorization.expression('isAuthenticated()')}" class="nav-bar">
+<div th:fragment="nav-bar" class="nav-bar">
     <div class="inner-nav">
         <span class="logo">Brew-Hop</span>
       <ul class="nav-list">
@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div th:fragment="nav-bar2" th:if="${#authorization.expression('isAuthenticated()')}" class="nav-bar">
+<div th:fragment="nav-bar2" class="nav-bar">
     <div class="inner-nav">
         <span class="logo">Brew-Hop</span>
       <ul>

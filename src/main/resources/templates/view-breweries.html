@@ -2,8 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:replace="partials/head.html :: header"></header>
 <body>
-    <nav th:insert="partials/nav-bar.html :: nav-bar2"></nav>
-    <nav th:insert="partials/nav-bar.html :: nav-bar"></nav>
+    <div th:unless="${#authorization.expression('isAuthenticated()')}">
+        <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
+    </div>
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
+    </div>
     <div class="container">
         <h1>Search Open Brewery DB</h1>
         <input type="text" id="breweryName" placeholder="Brewery Name">
