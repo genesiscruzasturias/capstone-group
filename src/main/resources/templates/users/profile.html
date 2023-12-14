@@ -54,16 +54,20 @@
             color: #deb217;
     </style>
 </head>
-<header th:replace="~{partials/head.html :: header}">
-</header>
+<!--<header th:replace="~{partials/head.html :: header}">-->
+<!--</header>-->
 <body>
 
 
-    <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
-    <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
+    <div th:unless="${#authorization.expression('isAuthenticated()')}">
+        <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
+    </div>
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
+    </div>
 
 
-    <div class="container">
+
         <div class="profileBox-container">
             <div class="pfp">Profile Picture</div>
                 <div class="user-info">
@@ -74,18 +78,20 @@
 
                 </div>
             </div>
-        </div>
+
     <div class="container">
-        <div class="profileBox-container">
-            <ul>
-                <th:block th:each="review : ${userReviews}">
-                    <li>
-                        <span th:text="${review?.description}"></span>
-                        <button><a th:href="@{/view-review/{id}(id=${review.id})}">View Review</a></button>
+        <div class="reviewBox-container">
+            <div class="col">
+                <ul>
+                    <th:block th:each="review : ${userReviews}">
+                        <li>
+                         <span th:text="${review?.description}"></span>
+                            <button><a th:href="@{/view-review/{id}(id=${review.id})}">View Review</a></button>
 <!--                        <button class="delete-modal-btn" data-review-id="${review?.id}" th:attr="data-review-description=${review?.description}">Delete</button>-->
-                    </li>
-                </th:block>
-            </ul>
+                         </li>
+                     </th:block>
+                </ul>
+            </div>
         </div>
     </div>
     <!-- Will work on modal later -->

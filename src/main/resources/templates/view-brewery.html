@@ -19,10 +19,15 @@
         }
     </style>
     <title>Brewery Page</title>
+    <header th:replace="~{partials/head.html :: header}"></header>
 </head>
 <body>
-    <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
+<div th:unless="${#authorization.expression('isAuthenticated()')}">
     <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
+</div>
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
+</div>
     <div id="breweryInfo"></div>
 
     <form id="brewIDGet" th:action="@{/create}" th:method="get">

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>All Posts</title>
+    <header th:replace="~{partials/head.html :: header}"></header>
 </head>
 <body>
 <div th:each="review : ${reviews}">
