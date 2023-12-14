@@ -4,15 +4,11 @@ import com.example.codeupspringcapstone.models.Review;
 import com.example.codeupspringcapstone.models.User;
 import com.example.codeupspringcapstone.repositories.ReviewRepository;
 import com.example.codeupspringcapstone.repositories.UserRepository;
-<<<<<<< HEAD
-=======
 import org.springframework.security.core.Authentication;
->>>>>>> a7e7e58a757476cb3c985a0639283473505fdac2
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -54,12 +50,9 @@ public class BreweryController {
 
     @PostMapping("/view-brewery")
     public String viewBrewery (@ModelAttribute Review review, Model model, @RequestParam String breweryId) {
-<<<<<<< HEAD
-=======
-Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userDAO.findByUsername(authentication.getName());
 
->>>>>>> a7e7e58a757476cb3c985a0639283473505fdac2
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userDAO.findByUsername(authentication.getName());
         review.setBrewery(breweryId);
         review.setDescription(review.getDescription());
         review.setImage(review.getImage());
