@@ -4,6 +4,8 @@ import com.example.codeupspringcapstone.models.Review;
 import com.example.codeupspringcapstone.models.User;
 import com.example.codeupspringcapstone.repositories.ReviewRepository;
 import com.example.codeupspringcapstone.repositories.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +51,9 @@ public class BreweryController {
 
     @PostMapping("/view-brewery")
     public String viewBrewery (@ModelAttribute Review review, Model model, @RequestParam String breweryId) {
-        User user = userDAO.getUsersById(1L);
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userDAO.findByUsername(authentication.getName());
+
         review.setBrewery(breweryId);
         review.setUser(user);
         review.setDescription(review.getDescription());
