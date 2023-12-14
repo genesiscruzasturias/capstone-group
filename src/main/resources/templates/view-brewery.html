@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .review-card {
+            height: 300px;
+            width: 400px;
+            border: 1px solid transparent;
+            border-radius: 15px;
+            margin: 25px;
+            box-shadow: 5px 5px 10px 1px grey;
+            padding: 20px;
+        }
+        .checked {
+            color: #deb217;
+        }
+    </style>
     <title>Brewery Page</title>
     <header th:replace="~{partials/head.html :: header}"></header>
 </head>
@@ -24,17 +39,18 @@
     <div id="reviewSection">
         <h2>Reviews</h2>
         <div th:each="review : ${listOfReviews}">
+            <div class="review-card">
             <div class="rate">
-                <p th:text="${review.getRating()}"></p>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
+                <p class="rating" th:text="${review.getRating()}"></p>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
             </div>
-            <img th:src="${review.getImage()}"></img>
-
+            <img th:src="${review.getImage()}" style="width: 350px; height: 200px;">
             <p th:text="${review.getDescription()}"></p>
+        </div>
         </div>
     </div>
 

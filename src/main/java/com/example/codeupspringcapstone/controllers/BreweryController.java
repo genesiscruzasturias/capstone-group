@@ -4,7 +4,10 @@ import com.example.codeupspringcapstone.models.Review;
 import com.example.codeupspringcapstone.models.User;
 import com.example.codeupspringcapstone.repositories.ReviewRepository;
 import com.example.codeupspringcapstone.repositories.UserRepository;
+<<<<<<< HEAD
+=======
 import org.springframework.security.core.Authentication;
+>>>>>>> a7e7e58a757476cb3c985a0639283473505fdac2
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +45,7 @@ public class BreweryController {
     }
 
     @GetMapping("/view-brewery")
-    public String createReview(Model model, @RequestParam(name = "brewery") String breweryId){
+    public String createReview(Model model, @RequestParam(name = "brewery") String breweryId, User user){
         model.addAttribute("review", new Review());
         ArrayList<Review> breweryReviews = new ArrayList<>(reviewDAO.findReviewsByBrewery(breweryId));
         model.addAttribute("listOfReviews", breweryReviews);
@@ -51,16 +54,17 @@ public class BreweryController {
 
     @PostMapping("/view-brewery")
     public String viewBrewery (@ModelAttribute Review review, Model model, @RequestParam String breweryId) {
+<<<<<<< HEAD
+=======
 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userDAO.findByUsername(authentication.getName());
 
+>>>>>>> a7e7e58a757476cb3c985a0639283473505fdac2
         review.setBrewery(breweryId);
-        review.setUser(user);
         review.setDescription(review.getDescription());
         review.setImage(review.getImage());
         review.setRating(review.getRating());
         reviewDAO.save(review);
-
         model.addAttribute("breweryId", breweryId);
         return "redirect:/view-brewery?brewery=" + breweryId;
     }
