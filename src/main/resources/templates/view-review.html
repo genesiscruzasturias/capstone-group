@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <header th:replace="~{partials/head.html :: header}"></header>
 </head>
 <body>
+<div th:unless="${#authorization.expression('isAuthenticated()')}">
+    <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
+</div>
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
+</div>
 <h1>Edit Review</h1>
 <form th:action="@{/review/edit}" th:object="${review}" th:method="post">
     <div>

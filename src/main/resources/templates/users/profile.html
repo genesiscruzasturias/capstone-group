@@ -41,14 +41,19 @@
             cursor: pointer;
         }
     </style>
+    <header th:replace="~{partials/head.html :: header}"></header>
 </head>
 <header th:replace="~{partials/head.html :: header}">
 </header>
 <body>
 
 
-    <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
-    <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
+    <div th:unless="${#authorization.expression('isAuthenticated()')}">
+        <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
+    </div>
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
+    </div>
 
 
     <div class="container">
