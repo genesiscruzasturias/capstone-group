@@ -79,16 +79,20 @@ public class ReviewController {
         return "redirect:/profile";
     }
 
-    @DeleteMapping("/profile/delete-review/{id}")
-    public ResponseEntity<String> deleteReview (@PathVariable long id) {
-        try {
-            // Assuming reviewRepository is an instance of ReviewRepository
-            reviewRepository.deleteById(id);
-            return ResponseEntity.ok("Review deleted successfully");
-        } catch (Exception e) {
-            e.printStackTrace();  // Log the exception for debugging purposes
-            return ResponseEntity.status(500).body("Error deleting review");
-        }
+//    @PostMapping("/review/delete")
+//    public String deletePost(@ModelAttribute Review review) {
+//        System.out.println("Does this run?");
+////        postDao.deleteById(id);
+//        reviewRepository.delete(review);
+//        return "redirect:/profile";
+//    }
+    @PostMapping("/review/delete")
+    public String deleteProfile(@ModelAttribute Review review, @RequestParam("confirmation") String confirmation) {
+
+        if ("confirm".equals(confirmation)) {
+             reviewRepository.deleteById(review.getId());
+        }   return "redirect:/profile";
+
     }
 
 }
