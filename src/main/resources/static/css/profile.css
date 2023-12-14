@@ -1,4 +1,16 @@
 *{
     margin: 0;
     padding: 0;
+    background-color: #9BA1B1;
+}
+.container{
+    /*display: grid;*/
+}
+.profileBox-container > .user-info{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    height: 500px;
+    margin: 0;
+    text-align: center;
 }
