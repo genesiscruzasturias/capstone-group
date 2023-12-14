@@ -1,50 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <link rel="stylesheet" href="/css/profile.css">
     <meta name="_csrf" th:content="${_csrf.token}" />
-    <style>
-        /* The Modal */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-
-        /* Modal Content */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        /* Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
-    <header th:replace="~{partials/head.html :: header}"></header>
 </head>
-<header th:replace="~{partials/head.html :: header}">
-</header>
+<!--<header th:replace="~{partials/head.html :: header}">-->
+<!--</header>-->
 <body>
 
 
@@ -56,7 +17,7 @@
     </div>
 
 
-    <div class="container">
+
         <div class="profileBox-container">
             <div class="pfp">Profile Picture</div>
                 <div class="user-info">
@@ -67,18 +28,20 @@
 
                 </div>
             </div>
-        </div>
+
     <div class="container">
-        <div class="profileBox-container">
-            <ul>
-                <th:block th:each="review : ${userReviews}">
-                    <li>
-                        <span th:text="${review?.description}"></span>
-                        <button><a th:href="@{/view-review/{id}(id=${review.id})}">View Review</a></button>
+        <div class="reviewBox-container">
+            <div class="col">
+                <ul>
+                    <th:block th:each="review : ${userReviews}">
+                        <li>
+                         <span th:text="${review?.description}"></span>
+                            <button><a th:href="@{/view-review/{id}(id=${review.id})}">View Review</a></button>
 <!--                        <button class="delete-modal-btn" data-review-id="${review?.id}" th:attr="data-review-description=${review?.description}">Delete</button>-->
-                    </li>
-                </th:block>
-            </ul>
+                         </li>
+                     </th:block>
+                </ul>
+            </div>
         </div>
     </div>
     <!-- Will work on modal later -->
