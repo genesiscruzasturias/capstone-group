@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <header th:replace="~{partials/head.html :: header}"></header>
-<nav th:insert="~{partials/nav-bar.html :: nav-bar3}"></nav>
 <body>
+<nav th:insert="~{partials/nav-bar.html :: nav-bar3}"></nav>
 
 <h1>Create an account</h1>
-<form th:action="@{/sign-up}" method="POST" th:object="${user}">
+<form th:action="@{/sign-up}" method="POST" th:object="${user}" onsubmit="validatePassword(event)">
     <label for="username">Username</label>
     <input id="username" th:field="*{username}" required/>
     <p th:if="${usernameError}" th:text="${usernameError}" class="error"></p>
@@ -16,9 +16,34 @@
 
     <label for="password">Password</label>
     <input id="password" type="password" th:field="*{password}" required/>
+<!--    <p>-->
+<!--        The password must meet the following criteria:<br>-->
+<!--        - At least 8 characters long.<br>-->
+<!--        - Contains at least one number<br>-->
+<!--        - Contains at least one lowercase letter.<br>-->
+<!--        - Contains at least one uppercase letter.<br>-->
+<!--        - Can not contain any spaces.-->
+<!--    </p>-->
+    <p id="password-error" class="error"></p>
 
     <input value="Sign me up!" type="submit" />
 </form>
 <p>Already have an account? <a href="/sign-in">Sign in here!</a></p>
+
+<script>
+    // function validatePassword(event) {
+    //     event.preventDefault();
+    //
+    //     const passwordInput = document.getElementById('password');
+    //     const passwordError = document.getElementById('password-error');
+    //     const passwordPattern = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,}$/;
+    //
+    //     if (!passwordPattern.test(passwordInput.value)) {
+    //         passwordError.textContent = "The password you entered does not meet the criteria. Please try again.;"
+    //     } else {
+            document.querySelector('form').submit();
+        }
+    }
+</script>
 </body>
 </html>

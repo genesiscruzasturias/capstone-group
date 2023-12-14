@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-
+import jakarta.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
 @Table(name="users")
 public class User {
 
-    //    CREATING COLUMN FIELDS
+    // CREATING COLUMN FIELDS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,6 +28,7 @@ public class User {
     @Column(name = "password", nullable = false)
     @NotBlank(message = "Password is required")
     @JsonIgnore
+//    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$", message = "Password must be at least 8 characters long, contain at least one digit, one lowercase letter, one uppercase letter, and no whitespace.")
     private String password;
 
     // CREATING RELATIONSHIPS
@@ -42,7 +43,6 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-
     }
     public List<Review> getReviews() {
         return reviews;
@@ -104,6 +104,4 @@ public class User {
     public String getPassword () {
         return password;
     }
-
-
 }
