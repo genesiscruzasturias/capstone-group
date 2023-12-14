@@ -6,8 +6,8 @@
     <title>Brewery Page</title>
 </head>
 <body>
-    <nav th:insert="partials/nav-bar.html :: nav-bar2"></nav>
-    <nav th:insert="partials/nav-bar.html :: nav-bar"></nav>
+    <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
+    <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
     <div id="breweryInfo"></div>
 
     <form id="brewIDGet" th:action="@{/create}" th:method="get">
