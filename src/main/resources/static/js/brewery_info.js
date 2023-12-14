@@ -39,7 +39,21 @@
             .catch(error => console.error('Error:', error));
     }
 
+let reviewCards = document.getElementsByClassName('review-card');
 
+    for (let card of reviewCards) {
+
+    let ratingNumber = parseInt(card.querySelector(".rating").textContent);
+    let ratingStars = card.getElementsByClassName('fa-star');
+    let ratingStarsArray = ratingStars.toArray;
+
+    for (let i = 0; i < ratingNumber; i++) {
+        ratingStars[i].classList.add('checked');
+        console.log('added class to star element' + i);
+
+    }
+
+    }
 
     function formatPhoneNumber(phoneNumber) {
     const cleaned = ('' + phoneNumber).replace(/\D/g, '');

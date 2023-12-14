@@ -1,3 +1,2 @@
-const client = filestack.init("A3j1UQdnoRfGB3EbdAOmez");
-
+const client = filestack.init("AkUJfmkqKQBWeoL0RW4C8z");
 export {client};

@@ -1,0 +1,6 @@
+.review-card {
+    height: 100px;
+    width: 250px;
+    border: 1px solid transparent;
+    border-radius: 25px;
+}

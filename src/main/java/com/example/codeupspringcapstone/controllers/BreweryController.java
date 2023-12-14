@@ -4,6 +4,7 @@ import com.example.codeupspringcapstone.models.Review;
 import com.example.codeupspringcapstone.models.User;
 import com.example.codeupspringcapstone.repositories.ReviewRepository;
 import com.example.codeupspringcapstone.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class BreweryController {
     }
 
     @GetMapping("/view-brewery")
-    public String createReview(Model model, @RequestParam(name = "brewery") String breweryId){
+    public String createReview(Model model, @RequestParam(name = "brewery") String breweryId, User user){
         model.addAttribute("review", new Review());
         ArrayList<Review> breweryReviews = new ArrayList<>(reviewDAO.findReviewsByBrewery(breweryId));
         model.addAttribute("listOfReviews", breweryReviews);
@@ -49,14 +50,11 @@ public class BreweryController {
 
     @PostMapping("/view-brewery")
     public String viewBrewery (@ModelAttribute Review review, Model model, @RequestParam String breweryId) {
-        User user = userDAO.getUsersById(1L);
         review.setBrewery(breweryId);
-        review.setUser(user);
         review.setDescription(review.getDescription());
         review.setImage(review.getImage());
         review.setRating(review.getRating());
         reviewDAO.save(review);
-
         model.addAttribute("breweryId", breweryId);
         return "redirect:/view-brewery?brewery=" + breweryId;
     }

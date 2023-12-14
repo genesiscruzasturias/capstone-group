@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="_csrf" th:content="${_csrf.token}" />
     <style>
         /* The Modal */
@@ -40,6 +41,17 @@
             text-decoration: none;
             cursor: pointer;
         }
+        .review-card {
+            height: 300px;
+            width: 400px;
+            border: 1px solid transparent;
+            border-radius: 15px;
+            margin: 25px;
+            box-shadow: 5px 5px 10px 1px grey;
+            padding: 20px;
+        }
+        .checked {
+            color: #deb217;
     </style>
 </head>
 <header th:replace="~{partials/head.html :: header}">
