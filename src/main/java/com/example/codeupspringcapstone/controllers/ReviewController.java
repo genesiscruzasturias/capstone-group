@@ -23,8 +23,6 @@ public class ReviewController {
         this.userDAO = userDAO;
     }
 
-
-
     @GetMapping("/create")
     public String setPostModel(Model model) {
         String defaultId = "default_id";
