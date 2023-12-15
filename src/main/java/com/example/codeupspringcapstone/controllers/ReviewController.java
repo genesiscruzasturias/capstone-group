@@ -33,27 +33,50 @@ public class ReviewController {
 
         return "create-review";
     }
+//controller is not saving photos
+//    @PostMapping("/create")
+//    public String createPost(@ModelAttribute Review review, Model model, @RequestParam String breweryId){
+//        System.out.println("Does this run?");
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User currentUser = userDAO.findByUsername(user.getUsername());
+//        Review newReview = new Review();
+////        String breweryId = "random-brewery-id";
+//        review = reviewRepository.getPostById(1L);
+//        newReview.setBrewery(breweryId);
+//        newReview.setUser(currentUser);
+//        newReview.setDescription(review.getDescription());
+//        newReview.setImage("image.jpg");
+//        newReview.setRating(10);
+//        reviewRepository.save(newReview);
+////        model.addAttribute("brewery", brewery);
+//        model.addAttribute("review", newReview);
+////        model.
+////        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
+//        return "redirect:/view-brewery?brewery=" + breweryId;
+//    }
+//    -------
 
+
+//controller is working saving photos and userId
     @PostMapping("/create")
-    public String createPost(@ModelAttribute Review review, Model model, @RequestParam String breweryId){
-        System.out.println("Does this run?");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = userDAO.findByUsername(user.getUsername());
-        Review newReview = new Review();
-//        String breweryId = "random-brewery-id";
-        review = reviewRepository.getPostById(1L);
-        newReview.setBrewery(breweryId);
-        newReview.setUser(currentUser);
-        newReview.setDescription(review.getDescription());
-        newReview.setImage("image.jpg");
-        newReview.setRating(10);
-        reviewRepository.save(newReview);
-//        model.addAttribute("brewery", brewery);
+public String createPost(@ModelAttribute Review review, Model model, @RequestParam String breweryId) {
+    System.out.println("Does this run?");
+    // Get current user from the security context
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User currentUser = userDAO.findByUsername(user.getUsername());
+    // Create a new review with data from the form
+    Review newReview = new Review();
+    newReview.setBrewery(breweryId);
+    newReview.setUser(currentUser);
+    newReview.setDescription(review.getDescription());
+    // Set the image URL received from the form
+    newReview.setImage(review.getImage());  // Assuming 'review.getImage()' gets the image URL from the form
+    newReview.setRating(review.getRating());  // Set rating from the form
+    // Save the new review
+    reviewRepository.save(newReview);
         model.addAttribute("review", newReview);
-//        model.
-//        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
-        return "redirect:/view-brewery?brewery=" + breweryId;
-    }
+       return "redirect:/view-brewery?brewery=" + breweryId;
+}
 
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
