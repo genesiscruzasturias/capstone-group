@@ -24,7 +24,6 @@
         <div class="pfp circle">Profile Picture</div>
         <h1 class="username-h1"><span class="span-username" th:text="${user.username}"></span></h1>
         <p class="email-p" th:text="${user.email}"></p>
-        <p th:text="${user.password}" ></p>
         <button class="edit-profile-btn"><a th:href="@{/profile/edit/{id}(id = ${ user.getId()})}">Edit Profile</a></button>
     </div>
 </div>
