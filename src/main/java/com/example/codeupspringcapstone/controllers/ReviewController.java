@@ -36,12 +36,14 @@ public class ReviewController {
 
     @PostMapping("/create")
     public String createPost(@ModelAttribute Review review, Model model, @RequestParam String breweryId){
+        System.out.println("Does this run?");
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userDAO.findByUsername(user.getUsername());
         Review newReview = new Review();
 //        String breweryId = "random-brewery-id";
         review = reviewRepository.getPostById(1L);
         newReview.setBrewery(breweryId);
-        newReview.setUser(user);
+        newReview.setUser(currentUser);
         newReview.setDescription(review.getDescription());
         newReview.setImage("image.jpg");
         newReview.setRating(10);
@@ -52,6 +54,7 @@ public class ReviewController {
 //        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
         return "redirect:/view-brewery?brewery=" + breweryId;
     }
+
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
     public String individualPost(@PathVariable long id, Model model) {

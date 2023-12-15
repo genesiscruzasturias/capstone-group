@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
-<header th:replace="~{partials/head.html :: header}"></header>
-<nav th:insert="~{partials/nav-bar.html :: nav-bar3}"></nav>
+<head>
+    <header th:replace="~{partials/head.html :: header}"></header>
+    <link rel="stylesheet" href="/css/sign-up.css"> <!-- Reusing the same CSS file -->
+    <title>Sign In</title>
+</head>
 <body>
-    <h1>Sign in to your Account!</h1>
-    <div th:if="${param.error}">
-        Invalid Username and Password.
-    </div>
-    <div th:if="${param.logout}">
-        You have been logged out.
-    </div>
-    <p>New user? <a href="/sign-up">Sign up here!</a></p>
+<nav th:insert="~{partials/nav-bar.html :: nav-bar3}"></nav>
+<div class="content-container">
+    <h1>SIGN INTO YOUR ACCOUNT</h1>
+    <div class="card">
+        <form th:action="@{/sign-in}" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" name="username" required/>
+            </div>
 
-    <form th:action="@{/sign-in}" method="post">
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" />
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" />
-        <input type="submit" value="Log In" />
-    </form>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" required/>
+            </div>
+
+            <input value="Log In" type="submit" />
+        </form>
+        <p>New user? <a href="/sign-up">Sign up here!</a></p>
+    </div>
+</div>
 </body>
 </html>
