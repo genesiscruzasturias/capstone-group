@@ -41,7 +41,7 @@
         <div th:each="review : ${listOfReviews}">
             <div class="review-card">
             <div class="rate">
-                <p class="rating" th:text="${review.getRating()}"></p>
+                <p th:hidden="true" class="rating" th:text="${review.getRating()}"></p>
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
