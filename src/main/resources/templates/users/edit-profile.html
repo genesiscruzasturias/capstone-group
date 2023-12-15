@@ -13,7 +13,11 @@
     <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
 </div>
 <h1>Edit Profile</h1>
+<img id="profilePicture" th:src="${user.getProfilePicURL()}" style="width: 350px; height: 200px;">
+
 <form th:action="@{/profile/edit}" th:object="${user}" th:method="post">
+    <button id="profilePicUpload">Upload Profile Picture</button>
+    <input id="profilePicURL" type="hidden" th:field="*{profilePicURL}" th:value="${user.getProfilePicURL()}"/>
 
     <input type="hidden" th:field="*{id}"/>
     <div>
@@ -38,5 +42,8 @@
         <button type="submit" onclick="return confirm('Are you sure you want to delete your profile?')">Delete Profile
         </button>
     </form>
+
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script type="module" src="/js/profile.js"></script>
 </body>
 </html>

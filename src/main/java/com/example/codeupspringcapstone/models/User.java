@@ -27,9 +27,11 @@ public class User {
 
     @Column(name = "password", nullable = false)
     @NotBlank(message = "Password is required")
-    @JsonIgnore
 //    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$", message = "Password must be at least 8 characters long, contain at least one digit, one lowercase letter, one uppercase letter, and no whitespace.")
     private String password;
+
+    @Column(name = "profile_pic")
+    private String profilePicURL;
 
     // CREATING RELATIONSHIPS
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -103,5 +105,13 @@ public class User {
 
     public String getPassword () {
         return password;
+    }
+
+    public void setProfilePicURL (String profilePicURL) {
+        this.profilePicURL = profilePicURL;
+    }
+
+    public String getProfilePicURL () {
+        return profilePicURL;
     }
 }
