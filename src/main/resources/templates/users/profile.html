@@ -1,101 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="_csrf" th:content="${_csrf.token}" />
-    <style>
-        /* The Modal */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-
-        /* Modal Content */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        /* Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .review-card {
-            height: 300px;
-            width: 400px;
-            border: 1px solid transparent;
-            border-radius: 15px;
-            margin: 25px;
-            box-shadow: 5px 5px 10px 1px grey;
-            padding: 20px;
-        }
-        .checked {
-            color: #deb217;
-        }
-    </style>
 </head>
-<!--<header th:replace="~{partials/head.html :: header}">-->
-<!--</header>-->
+<header th:replace="~{partials/head.html :: header}">
+</header>
 <body>
 
 
-    <div th:unless="${#authorization.expression('isAuthenticated()')}">
-        <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
+<div th:unless="${#authorization.expression('isAuthenticated()')}">
+    <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
+</div>
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
+</div>
+
+
+
+<div class="card-main-profile profile-card">
+    <div class="card-stuff-profile">
+        <div class="pfp circle">Profile Picture</div>
+        <h1 class="username-h1"><span class="span-username" th:text="${user.username}"></span></h1>
+        <p class="email-p" th:text="${user.email}"></p>
+        <p th:text="${user.password}" ></p>
+        <button class="edit-profile-btn"><a th:href="@{/profile/edit/{id}(id = ${ user.getId()})}">Edit Profile</a></button>
     </div>
-    <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
-    </div>
+</div>
 
-
-
-        <div class="profileBox-container">
-            <div class="pfp">Profile Picture</div>
-                <div class="user-info">
-                   <h1><span th:text="${user.username}"></span></h1>
-                    <p th:text="${user.email}"></p>
-                    <p th:text="${user.password}"></p>
-                    <button><a th:href="@{/profile/edit/{id}(id = ${ user.getId()})}">Edit Profile</a></button>
-
+<!--    <h3 class="user-reviews-text">User Reviews</h3>-->
+<div class="container review-container">
+    <th:block th:each="review : ${userReviews}">
+        <div class="reviewBox-container">
+            <div class="card-main">
+                <div class="card-stuff">
+                    <img th:src="${review.image}" style="max-width: 200px; max-height: 200px;">
+                    <p class="rating" th:text="${review.rating}"></p>
+                    <h5 class="card-title" th:text="${review?.description}"></h5>
+                    <button class="card-button"><a th:href="@{/view-review/{id}(id=${review.id})}">View Review</a></button>
                 </div>
             </div>
-
-    <div class="container">
-        <div class="reviewBox-container">
-            <div class="col">
-                <ul>
-                    <th:block th:each="review : ${userReviews}">
-                        <li>
-                         <span th:text="${review?.description}"></span>
-                            <button><a th:href="@{/view-review/{id}(id=${review.id})}">View Review</a></button>
-<!--                        <button class="delete-modal-btn" data-review-id="${review?.id}" th:attr="data-review-description=${review?.description}">Delete</button>-->
-                         </li>
-                     </th:block>
-                </ul>
-            </div>
         </div>
-    </div>
-    <!-- Will work on modal later -->
+    </th:block>
+</div>
+<!-- Will work on modal later -->
 <!--    <div id="myModal" class="modal">-->
 <!--        <div class="modal-content">-->
 <!--            <span class="close">&times;</span>-->
@@ -124,4 +73,3 @@
 
 </body>
 </html>
-
