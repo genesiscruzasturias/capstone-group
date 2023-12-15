@@ -10,6 +10,13 @@
         <div th:if="${#authorization.expression('isAuthenticated()')}">
             <nav th:insert="~{partials/nav-bar.html :: nav-bar2}"></nav>
         </div>
+<!--        <div id="ageModal" class="modal">-->
+<!--            <div class="modal-content">-->
+<!--                <h2>Are you over 21?</h2>-->
+<!--                <button onclick="redirectToPage(true)">Yes</button>-->
+<!--                <button onclick="redirectToPage(false)">No</button>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="hero-top">
             <div class="welcome-box">
@@ -50,5 +57,6 @@
             <h2>Meet the Team | About Brew-Hop | Terms of Service</h2>
         </div>
     </div>
+
 </body>
 </html>
