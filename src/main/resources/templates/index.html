@@ -3,6 +3,7 @@
 <header th:replace="~{partials/head.html :: header}"></header>
 <body>
     <div class="container">
+        <!--Navbar validation-->
         <div th:unless="${#authorization.expression('isAuthenticated()')}">
             <nav th:insert="~{partials/nav-bar.html :: nav-bar}"></nav>
         </div>
@@ -12,20 +13,35 @@
 
         <div class="hero-top">
             <div class="welcome-box">
-                <h1>Welcome to <span class="hero-title">Brew-Hop!</span></h1>
+                <h1>Brew-Hop!</h1><br>
                 <p>We are passionate about connecting you to the best breweries around. Explore our easy-to-use search feature to discover your new favorite spot, and share your experiences by leaving reviews. Join our community of beer enthusiasts and let's celebrate the art of brewing together. Cheers to finding the perfect pint!</p>
-                <form th:action="@{/view-breweries.html}" th:method="post">
+                <form th:action="@{/view-breweries}" th:method="post">
                     <button>Check out Breweries</button>
                 </form>
-            </div>
-            <div class="hero-image">
-                <img src="/img/Untitled design.png" alt="Hero-Image">
             </div>
         </div>
         <div class="hero-bottom">
             <div class="breweries-holder-hero">
                 <h2>Check out some Breweries!</h2>
-                <div class ="random-brewery-holder"></div>
+                <input type="text" id="breweryName" placeholder="Brewery Name">
+                <input type="text" id="city" placeholder="City">
+                <input type="text" id="state" placeholder="State">
+                <select id="breweryType">
+                    <option value="">Select Brewery Type</option>
+                    <option value="micro">Micro</option>
+                    <option value="nano">Nano</option>
+                    <option value="regional">Regional</option>
+                    <option value="brewpub">Brewpub</option>
+                    <option value="large">Large</option>
+                    <option value="planning">Planning</option>
+                    <option value="bar">Bar</option>
+                    <option value="contract">Contract</option>
+                    <option value="proprietor">Proprietor</option>
+                    <option value="closed">Closed</option>
+                </select>
+                <button onclick="searchBreweries()">Search</button>
+                <div id="results"></div>
+                <script th:src="@{/js/brew.js}"></script>
             </div>
         </div>
         <div class="footer">
