@@ -13,7 +13,7 @@ function searchBreweries() {
     const state = document.getElementById('state').value;
     const type = document.getElementById('breweryType').value;
 
-    let url = 'https://api.openbrewerydb.org/v1/breweries?';
+    let url = 'https://api.openbrewerydb.org/v1/breweries?per_page=10&';
     if (name) url += `by_name=${encodeURIComponent(name)}&`;
     if (city) url += `by_city=${encodeURIComponent(city)}&`;
     if (state) url += `by_state=${encodeURIComponent(state)}&`;
